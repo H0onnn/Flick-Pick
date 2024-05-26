@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="kr">
       <body className={inter.className}>
-        <div className="container mx-auto px-0 sm:px-6 lg:px-8 box-border overflow-auto">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 box-border overflow-auto">
           <QueryProvider>{children}</QueryProvider>
         </div>
       </body>
