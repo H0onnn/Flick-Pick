@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/shared/styles";
 
-import { QueryClientPovider as QueryProvider } from "./shared/provider";
+import {
+  QueryClientPovider as QueryProvider,
+  SessionProvider,
+} from "../shared/provider";
+import { Footer } from "../shared/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +24,11 @@ export default function RootLayout({
     <html lang="kr">
       <body className={inter.className}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 box-border overflow-auto">
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <SessionProvider>{children}</SessionProvider>
+          </QueryProvider>
         </div>
+        <Footer />
       </body>
     </html>
   );
