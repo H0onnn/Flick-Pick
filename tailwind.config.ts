@@ -23,6 +23,7 @@ const config = {
         "md-max": { max: "1100px" },
       },
       colors: {
+        kakao: "#FFEB00",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
