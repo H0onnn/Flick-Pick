@@ -4,10 +4,10 @@ import { MovieList } from "@/app/shared/types";
 const TMDB_API_URL = process.env.TMDB_API_URL;
 const TMDB_ACCESS_TOKEN = process.env.TMDB_ACCESS_TOKEN;
 
-export const fetchMoviesByTopRated = async () => {
+export const fetchMoviesByNowPlaying = async () => {
   try {
     const response = await fetch(
-      `${TMDB_API_URL}top_rated?language=ko-KR&region=KR&sort_by=vote_average.desc&video=true&adult=false`,
+      `${TMDB_API_URL}now_playing?language=ko-KR&region=KR&sort_by=vote_average.desc&video=true&adult=false`,
       {
         method: "GET",
         headers: {
@@ -23,12 +23,12 @@ export const fetchMoviesByTopRated = async () => {
   }
 };
 
-export const useGetMoviesByTopRated = () => {
+export const useGetMoviesByNowPlaying = () => {
   const { data, isFetching } = useQuery<MovieList>({
-    queryKey: ["movies", "top_rated"],
-    queryFn: fetchMoviesByTopRated,
+    queryKey: ["movies", "now_playing"],
+    queryFn: fetchMoviesByNowPlaying,
     staleTime: 1000 * 60 * 60 * 24, // 24시간
   });
 
-  return { movieListByTopRated: data, isFetching };
+  return { movieListByNowPlaying: data, isFetching };
 };

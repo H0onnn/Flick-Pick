@@ -4,24 +4,38 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
-import { fetchMovies } from "../features/main/queries";
+import {
+  fetchMoviesByTopRated,
+  fetchMoviesByNowPlaying,
+} from "../features/main/queries";
 
 import { PageLayout, MainHeader } from "@/app/shared/components";
-import { BannerSection } from "@/app/features/main/components";
+import {
+  NowPlayingSection,
+  TopRatedSection,
+} from "@/app/features/main/sections";
 
 export default async function Page() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ["movies", "top_rated"],
-    queryFn: fetchMovies,
-    staleTime: 1000 * 60 * 60 * 24, // 24시간
-  });
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ["movies", "top_rated"],
+      queryFn: fetchMoviesByTopRated,
+      staleTime: 1000 * 60 * 60 * 24,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ["movies", "now_playing"],
+      queryFn: fetchMoviesByNowPlaying,
+      staleTime: 1000 * 60 * 60 * 24,
+    }),
+  ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <PageLayout header={<MainHeader />}>
-        <BannerSection />
+        <NowPlayingSection />
+        <TopRatedSection />
       </PageLayout>
     </HydrationBoundary>
   );
