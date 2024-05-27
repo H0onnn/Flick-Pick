@@ -14,7 +14,7 @@ import {
 
 import Autoplay from "embla-carousel-autoplay";
 
-export const MainBanner = () => {
+export const TopRatedCarousel = () => {
   const { movieListByTopRated, isFetching } = useGetMoviesByTopRated();
 
   if (!movieListByTopRated || isFetching) return null;

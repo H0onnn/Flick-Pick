@@ -1,3 +1,3 @@
-export * from "./main-banner";
 export * from "./movie-card";
-export * from "./banner-section";
+export * from "./top-rated-carousel";
+export * from "./now-playing-carousel";
