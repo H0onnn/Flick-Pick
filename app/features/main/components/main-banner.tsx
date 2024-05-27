@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { useGetMoviesByTopRated } from "../queries";
 import { MovieCard } from "./movie-card";
 import {
@@ -10,6 +12,8 @@ import {
   CarouselPrevious,
 } from "@/app/shared/components";
 
+import Autoplay from "embla-carousel-autoplay";
+
 export const MainBanner = () => {
   const { movieListByTopRated, isFetching } = useGetMoviesByTopRated();
 
@@ -17,8 +21,14 @@ export const MainBanner = () => {
 
   return (
     <Carousel
+      plugins={[
+        Autoplay({
+          delay: 4000,
+        }),
+      ]}
       opts={{
         align: "start",
+        loop: true,
         watchDrag: true,
       }}
     >
@@ -32,13 +42,15 @@ export const MainBanner = () => {
               h-[calc((100vw-16px)/3*1.5)] sm:h-[calc((100vw-16px)/3*1.5)] md:h-[calc((100vw-16px)/4*1.5)] lg:h-[calc((100vw-16px)/5*1.3)]
               "
           >
-            <MovieCard
-              poster_path={movie.poster_path}
-              rank={idx + 1}
-              title={movie.title}
-              release_date={movie.release_date.split("-")[0]}
-              vote_average={Number(movie.vote_average.toFixed(1))}
-            />
+            <Link href={`movie/${movie.id}`}>
+              <MovieCard
+                poster_path={movie.poster_path}
+                rank={idx + 1}
+                title={movie.title}
+                release_date={movie.release_date.split("-")[0]}
+                vote_average={Number(movie.vote_average.toFixed(1))}
+              />
+            </Link>
           </CarouselItem>
         ))}
       </CarouselContent>
