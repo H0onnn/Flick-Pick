@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
-import { fetchMovie } from "@/app/features/main/queries";
+import { fetchMovie } from "@/app/features/movie/queries";
 
 import { PageLayout, MainHeader } from "@/app/shared/components";
 
