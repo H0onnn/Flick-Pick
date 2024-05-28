@@ -7,13 +7,14 @@ import {
 import {
   fetchMoviesByTopRated,
   fetchMoviesByNowPlaying,
-} from "../features/main/queries";
+} from "../features/movie/queries";
 
 import { PageLayout, MainHeader } from "@/app/shared/components";
 import {
   NowPlayingSection,
   TopRatedSection,
-} from "@/app/features/main/sections";
+} from "@/app/features/movie/sections";
+import { MainReviewSection } from "@/app/features/review/sections";
 
 export default async function Page() {
   const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ export default async function Page() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <PageLayout header={<MainHeader />}>
+        <MainReviewSection />
         <NowPlayingSection />
         <TopRatedSection />
       </PageLayout>
