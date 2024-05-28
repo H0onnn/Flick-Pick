@@ -1,25 +1,82 @@
-import * as React from "react";
+"use client";
 
 import { cn } from "@/app/shared/lib/utils";
+import { cva } from "class-variance-authority";
+import { forwardRef } from "react";
+import { XCircleIcon } from "lucide-react";
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
-
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
-    return (
-      <input
-        type={type}
-        className={cn(
-          "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-          className,
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
+const inputVariants = cva(
+  `flex items-center bg-transparent gap-[4px] w-full text-gray600`,
+  {
+    variants: {
+      variant: {
+        box: "border-border border border-solid rounded-[16px] p-[12px]",
+        underline: "border-b-2 border-primary border-solid",
+        ghost: "",
+      },
+      size: {
+        lg: "h-13 label1",
+        md: "h-11 label2",
+        sm: "h-9 body2",
+      },
+    },
   },
 );
-Input.displayName = "Input";
 
-export { Input };
+type InputProps = {
+  variant?: "box" | "underline" | "ghost";
+  size?: "md" | "sm" | "lg";
+  className?: string;
+  leftSlot?: React.ReactNode;
+  rightSlot?: React.ReactNode | "reset";
+  value: string;
+  onChange: (value: string) => void;
+  isResetButton?: boolean;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "onChange">;
+
+const Input = (props: InputProps, ref: React.Ref<HTMLInputElement>) => {
+  const {
+    variant = "box",
+    size = "md",
+    className,
+    leftSlot,
+    rightSlot,
+    value,
+    onChange,
+    isResetButton,
+    ...rest
+  } = props;
+
+  const isValue = !!value;
+
+  return (
+    <div className={cn(inputVariants({ variant, size, className }))}>
+      {leftSlot != null ? leftSlot : null}
+      <input
+        ref={ref}
+        {...rest}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="outline-none shadow-none border-none appearance-none bg-transparent flex-1 placeholder:text-gray300"
+      />
+      {isResetButton && (
+        <ResetButton visible={isValue} onClick={() => onChange("")} />
+      )}
+      {rightSlot != null ? rightSlot : null}
+    </div>
+  );
+};
+
+const _Input = forwardRef<HTMLInputElement, InputProps>(Input);
+export { _Input as Input };
+
+type ResetButtonProps = {
+  visible: boolean;
+  onClick: () => void;
+};
+
+const ResetButton = ({ visible, onClick }: ResetButtonProps) => {
+  if (!visible) return null;
+
+  return <XCircleIcon className="w-[24px] h-[24px]" onClick={onClick} />;
+};
