@@ -11,13 +11,12 @@ export const PageLayout = ({
   header,
   className,
 }: PageLayoutProps) => {
-  //   const paddingBottom =
-  //     isBottomTabAcitivity && !isMyHome ? "pb-[83px]" : "pb-0";
+  const paddingBottom = header !== null ? "pb-[83px]" : "pb-0";
   const paddingTop = header !== null ? "pt-[62px]" : "pt-0";
 
   return (
     <div
-      className={cn([paddingTop])}
+      className={cn([paddingTop, paddingBottom, "min-h-screen"])}
       vaul-drawer-wrapper="" // eslint-disable-line
     >
       {header}
