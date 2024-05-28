@@ -19,8 +19,9 @@ const config = {
     },
     extend: {
       screens: {
-        "sm-max": { max: "760px" },
+        "sm-max": { max: "768px" },
         "md-max": { max: "1100px" },
+        "lg-min": { min: "1400px" },
       },
       colors: {
         kakao: "#FFEB00",
