@@ -75,6 +75,7 @@ model Review {
 
 model Movie {
   id        String   @id @default(cuid())
+  tmdbId    Int      @unique @map("tmdb_id")
   title     String
   poster    String
   voteAvg   Float    @map("vote_avg")
