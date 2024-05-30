@@ -6,7 +6,7 @@ import {
   QueryClientPovider as QueryProvider,
   SessionProvider,
 } from "../shared/provider";
-import { Footer } from "../shared/components";
+import { Footer, Toaster } from "../shared/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +25,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="container px-4 sm:px-6 lg:px-8 box-border overflow-auto">
           <QueryProvider>
-            <SessionProvider>{children}</SessionProvider>
+            <SessionProvider>
+              {children}
+              <Toaster richColors={true} theme="system" />
+            </SessionProvider>
           </QueryProvider>
         </div>
         <Footer />

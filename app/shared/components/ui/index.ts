@@ -5,3 +5,4 @@ export * from "./flex";
 export * from "./card";
 export * from "./badge";
 export * from "./dialog";
+export * from "./sonner";
