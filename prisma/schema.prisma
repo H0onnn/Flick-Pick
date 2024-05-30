@@ -60,28 +60,14 @@ model VerificationToken {
   @@map("verificationtokens")
 }
 model Review {
-  id        String   @id @default(cuid())
-  rating    Int
-  comment   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String   @map("user_id")
-  movieId   String   @map("movie_id")
+  id        String   @id @default(cuid()) // 리뷰 고유 아이디
+  rating    Int // 리뷰 평점
+  comment   String // 리뷰 내용
+  createdAt DateTime @default(now()) // 리뷰 작성일
+  updatedAt DateTime @updatedAt // 리뷰 수정일
+  userId    String   @map("user_id") // 리뷰 작성자 고유 아이디
+  movieId   String   @map("movie_id") // 리뷰 대상 영화의 고유 아이디
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  movie Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
  
-  @@map("reviews")
-}
-
-model Movie {
-  id        String   @id @default(cuid())
-  tmdbId    Int      @unique @map("tmdb_id")
-  title     String
-  poster    String
-  voteAvg   Float    @map("vote_avg")
-  release   DateTime
-  overview  String
-  reviews   Review[]
- 
-  @@map("movies")
+  @@map("reviews") // 테이블 이름을 reviews로 지정
 }
