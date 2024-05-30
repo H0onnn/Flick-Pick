@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { Movie } from "@/app/shared/types";
 import { Flex, Badge, Card, CardContent } from "@/app/shared/components";
@@ -9,7 +7,7 @@ interface MovieCardProps
     Movie,
     "poster_path" | "title" | "release_date" | "vote_average"
   > {
-  rank: number;
+  rank?: number;
   type?: "default" | "upcoming";
 }
 
@@ -24,9 +22,11 @@ export const MovieCard = ({
   return (
     <>
       <Card className="relative w-full h-full">
-        <Badge className="absolute rounded-full z-10 left-1 top-1 opacity-70">
-          <span className="text-sm">{rank}</span>
-        </Badge>
+        {rank && (
+          <Badge className="absolute rounded-full z-10 left-1 top-1 opacity-70">
+            <span className="text-sm">{rank}</span>
+          </Badge>
+        )}
         <CardContent className="flex aspect-square items-center justify-center">
           <Image
             src={`https://image.tmdb.org/t/p/w500/${poster_path}`}

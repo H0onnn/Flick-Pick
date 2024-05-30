@@ -34,7 +34,7 @@ export const UpComingCarousel = () => {
     >
       <CarouselPrevious className="-left-4 top-[40%] z-10 hidden sm:flex" />
       <CarouselContent className="pb-16">
-        {movieListByUpComing.results.map((movie, idx) => (
+        {movieListByUpComing.results.map((movie) => (
           <CarouselItem
             key={movie.id}
             className="
@@ -46,7 +46,6 @@ export const UpComingCarousel = () => {
               <MovieCard
                 type="upcoming"
                 poster_path={movie.poster_path}
-                rank={idx + 1}
                 title={movie.title}
                 release_date={movie.release_date}
                 vote_average={Number(movie.vote_average.toFixed(1))}
