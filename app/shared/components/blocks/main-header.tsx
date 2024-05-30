@@ -18,9 +18,9 @@ export const MainHeader = () => {
     <Header
       leftSlot={<Image src={IMAGES.LOGO} alt="로고" width={100} height={40} />}
       rightSlot={
-        status === "authenticated" ? (
-          <Flex align="center" justify="center" className="gap-4">
-            <SearchInput />
+        <Flex align="center" justify="center" className="gap-3">
+          <SearchInput />
+          {status === "authenticated" ? (
             <Link href={`user/${session.user?.id}`}>
               <div className="relative w-[34px] h-[34px] rounded-full sm-max:hidden border border-border border-solid">
                 <Image
@@ -31,10 +31,10 @@ export const MainHeader = () => {
                 />
               </div>
             </Link>
-          </Flex>
-        ) : (
-          <LoginModal />
-        )
+          ) : (
+            <LoginModal />
+          )}
+        </Flex>
       }
     >
       {null}
