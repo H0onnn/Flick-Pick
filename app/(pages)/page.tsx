@@ -7,12 +7,14 @@ import {
 import {
   fetchMoviesByTopRated,
   fetchMoviesByNowPlaying,
+  fetchMoviesByUpComing,
 } from "../features/movie/queries";
 
 import { PageLayout, MainHeader } from "@/app/shared/components";
 import {
   NowPlayingSection,
   TopRatedSection,
+  UpComingSection,
 } from "@/app/features/movie/sections";
 import { MainReviewSection } from "@/app/features/review/sections";
 
@@ -30,6 +32,11 @@ export default async function Page() {
       queryFn: fetchMoviesByNowPlaying,
       staleTime: 1000 * 60 * 60 * 24,
     }),
+    queryClient.prefetchQuery({
+      queryKey: ["movies", "upcoming"],
+      queryFn: fetchMoviesByUpComing,
+      staleTime: 1000 * 60 * 60 * 24,
+    }),
   ]);
 
   return (
@@ -38,6 +45,7 @@ export default async function Page() {
         <MainReviewSection />
         <NowPlayingSection />
         <TopRatedSection />
+        <UpComingSection />
       </PageLayout>
     </HydrationBoundary>
   );
