@@ -12,10 +12,22 @@ import {
   Button,
   Flex,
 } from "@/app/shared/components";
-
+import { toast } from "sonner";
 import { signIn } from "next-auth/react";
 
 export const LoginModal = () => {
+  const handleLogin = async (provider: string) => {
+    try {
+      await signIn(provider);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error("로그인에 실패했습니다.", {
+          description: error.message,
+        });
+      }
+    }
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -36,9 +48,7 @@ export const LoginModal = () => {
         <Button
           type="submit"
           className="bg-kakao mt-6 py-6 hover:bg-kakao/70"
-          onClick={() => {
-            signIn("kakao");
-          }}
+          onClick={() => handleLogin("kakao")}
         >
           <Flex align="center" justify="center" className="w-full gap-2">
             <Image src={ICONS.KAKAO} alt="카카오 로고" width={24} height={24} />
