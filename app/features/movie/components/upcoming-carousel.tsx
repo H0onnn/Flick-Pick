@@ -44,10 +44,11 @@ export const UpComingCarousel = () => {
           >
             <Link href={`movie/${movie.id}`}>
               <MovieCard
+                type="upcoming"
                 poster_path={movie.poster_path}
                 rank={idx + 1}
                 title={movie.title}
-                release_date={movie.release_date.split("-")[0]}
+                release_date={movie.release_date}
                 vote_average={Number(movie.vote_average.toFixed(1))}
               />
             </Link>

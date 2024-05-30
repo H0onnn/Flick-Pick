@@ -10,6 +10,7 @@ interface MovieCardProps
     "poster_path" | "title" | "release_date" | "vote_average"
   > {
   rank: number;
+  type?: "default" | "upcoming";
 }
 
 export const MovieCard = ({
@@ -18,6 +19,7 @@ export const MovieCard = ({
   release_date,
   vote_average,
   rank,
+  type = "default",
 }: MovieCardProps) => {
   return (
     <>
@@ -38,9 +40,15 @@ export const MovieCard = ({
       <Flex direction="column" className="mt-2 gap-1">
         <span className="label2 truncate">{title}</span>
         <Flex className="gap-1 label3 text-gray-500 hidden sm:flex">
-          <span>{release_date}</span>
-          <span>·</span>
-          <span>평점 {vote_average}</span>
+          {type === "default" ? (
+            <>
+              <span>{release_date}</span>
+              <span>·</span>
+              <span>평점 {vote_average}</span>
+            </>
+          ) : (
+            <span>{release_date} 개봉 예정</span>
+          )}
         </Flex>
       </Flex>
     </>
