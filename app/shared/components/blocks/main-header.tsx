@@ -16,7 +16,11 @@ export const MainHeader = () => {
 
   return (
     <Header
-      leftSlot={<Image src={IMAGES.LOGO} alt="로고" width={100} height={40} />}
+      leftSlot={
+        <Link href="/">
+          <Image src={IMAGES.LOGO} alt="로고" width={100} height={30} />
+        </Link>
+      }
       rightSlot={
         <Flex align="center" justify="center" className="gap-3">
           <SearchInput />
