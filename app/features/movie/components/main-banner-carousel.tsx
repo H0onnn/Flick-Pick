@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { useGetMoviesByNowPlaying } from "../queries";
 import {
   Carousel,
   CarouselContent,
@@ -13,11 +12,9 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 
-export const MainBannerCarousel = () => {
-  const { movieListByNowPlaying, isFetching } = useGetMoviesByNowPlaying();
+import { MovieList } from "@/app/shared/types";
 
-  if (!movieListByNowPlaying || isFetching) return null;
-
+export const MainBannerCarousel = ({ movieList }: { movieList: MovieList }) => {
   return (
     <Carousel
       plugins={[
@@ -33,7 +30,7 @@ export const MainBannerCarousel = () => {
       }}
     >
       <CarouselContent>
-        {movieListByNowPlaying.results.map((movie) => (
+        {movieList.results.map((movie) => (
           <CarouselItem key={movie.id}>
             <Link href={`movie/${movie.id}`}>
               <div className="relative h-80 sm:h-96 md:h-[450px] lg:h-[550px] bg-cover bg-center">

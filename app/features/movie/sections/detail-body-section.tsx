@@ -28,6 +28,10 @@ export const DetailBodySection = ({ movieId }: { movieId: string }) => {
         <Flex direction="column" className="pt-5 sm:py-5">
           <p className="head2 mb-2">줄거리</p>
           <p className="body2 text-gray-500">{movieInfo.overview}</p>
+          <Flex className="mt-7 gap-2 flex-col sm:flex-row">
+            <div className="w-full h-[150px] bg-gray-200">별점</div>
+            <div className="w-full h-[150px] bg-gray-200">그래프</div>
+          </Flex>
         </Flex>
       </Flex>
     </section>

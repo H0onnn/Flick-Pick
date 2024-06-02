@@ -1,9 +1,11 @@
 import { MainBannerCarousel } from "../components";
+import { getMoviesByNowPlaying } from "../queries/actions";
 
-export const MainBannerSection = () => {
+export const MainBannerSection = async () => {
+  const movieListByNowPlaying = await getMoviesByNowPlaying();
   return (
     <section>
-      <MainBannerCarousel />
+      <MainBannerCarousel movieList={movieListByNowPlaying} />
     </section>
   );
 };

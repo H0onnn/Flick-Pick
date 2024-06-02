@@ -1,14 +1,9 @@
-"use client";
-
-import { useGetMoviesByTopRated } from "../queries";
-
 import { Flex } from "@/app/shared/components";
 import { MainCarousel } from "../components";
+import { getMoviesByTopRated } from "../queries/actions";
 
-export const TopRatedSection = () => {
-  const { movieListByTopRated, isFetching } = useGetMoviesByTopRated();
-
-  if (!movieListByTopRated || isFetching) return null;
+export const TopRatedSection = async () => {
+  const movieListByTopRated = await getMoviesByTopRated();
 
   return (
     <section className="pt-8">

@@ -1,14 +1,9 @@
-"use client";
-
-import { useGetMoviesByNowPlaying } from "../queries";
-
 import { Flex } from "@/app/shared/components";
 import { MainCarousel } from "../components";
+import { getMoviesByNowPlaying } from "../queries/actions";
 
-export const NowPlayingSection = () => {
-  const { movieListByNowPlaying, isFetching } = useGetMoviesByNowPlaying();
-
-  if (!movieListByNowPlaying || isFetching) return null;
+export const NowPlayingSection = async () => {
+  const movieListByNowPlaying = await getMoviesByNowPlaying();
 
   return (
     <section className="pt-8">
