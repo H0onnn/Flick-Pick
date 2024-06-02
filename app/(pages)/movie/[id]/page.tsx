@@ -7,6 +7,10 @@ import {
 import { fetchMovie } from "@/app/features/movie/queries";
 
 import { PageLayout, MainHeader } from "@/app/shared/components";
+import {
+  DetailHeaderSection,
+  DetailBodySection,
+} from "@/app/features/movie/sections";
 
 export default async function Page({
   params,
@@ -25,10 +29,9 @@ export default async function Page({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <PageLayout header={<MainHeader />}>
-        <section className="py-5">
-          <h1>Movie Detail</h1>
-        </section>
+      <DetailHeaderSection movieId={params.id} />
+      <PageLayout header={<MainHeader />} isPaddingTop={false}>
+        <DetailBodySection movieId={params.id} />
       </PageLayout>
     </HydrationBoundary>
   );
