@@ -12,6 +12,7 @@ import {
 
 import { PageLayout, MainHeader } from "@/app/shared/components";
 import {
+  MainBannerSection,
   NowPlayingSection,
   TopRatedSection,
   UpComingSection,
@@ -21,6 +22,7 @@ import { MainReviewSection } from "@/app/features/review/sections";
 export default async function Page() {
   const queryClient = new QueryClient();
 
+  // ssr all movie data
   await Promise.all([
     queryClient.prefetchQuery({
       queryKey: ["movies", "top_rated"],
@@ -41,7 +43,8 @@ export default async function Page() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <PageLayout header={<MainHeader />}>
+      <MainBannerSection />
+      <PageLayout header={<MainHeader />} isPaddingTop={false}>
         <MainReviewSection />
         <NowPlayingSection />
         <TopRatedSection />
