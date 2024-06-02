@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import IMAGES from "@/public/images";
-import ICONS from "@/public/icons";
+import IMAGES from "@/app/public/images";
+import ICONS from "@/app/public/icons";
 
 import {
   Dialog,

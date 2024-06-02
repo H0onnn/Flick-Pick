@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useScroll } from "@/app/shared/hooks";
 import Image from "next/image";
 import Link from "next/link";
-import IMAGES from "@/public/images";
+import IMAGES from "@/app/public/images";
 import {
   Flex,
   Header,
