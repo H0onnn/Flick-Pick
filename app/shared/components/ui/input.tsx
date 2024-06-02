@@ -10,7 +10,7 @@ const inputVariants = cva(
   {
     variants: {
       variant: {
-        box: "border-border border border-solid rounded-[16px] p-[12px]",
+        box: "border-gray-100 border border-solid rounded-sm p-[12px]",
         underline: "border-b-2 border-primary border-solid",
         ghost: "",
       },
@@ -27,6 +27,7 @@ type InputProps = {
   variant?: "box" | "underline" | "ghost";
   size?: "md" | "sm" | "lg";
   className?: string;
+  inputClassName?: string;
   leftSlot?: React.ReactNode;
   rightSlot?: React.ReactNode | "reset";
   value: string;
@@ -39,6 +40,7 @@ const Input = (props: InputProps, ref: React.Ref<HTMLInputElement>) => {
     variant = "box",
     size = "md",
     className,
+    inputClassName,
     leftSlot,
     rightSlot,
     value,
@@ -57,7 +59,10 @@ const Input = (props: InputProps, ref: React.Ref<HTMLInputElement>) => {
         {...rest}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="outline-none shadow-none border-none appearance-none bg-transparent flex-1 placeholder:text-gray300"
+        className={cn(
+          "outline-none shadow-none border-none appearance-none bg-transparent flex-1 placeholder:text-gray-300",
+          inputClassName,
+        )}
       />
       {isResetButton && (
         <ResetButton visible={isValue} onClick={() => onChange("")} />
