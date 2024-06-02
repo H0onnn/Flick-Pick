@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="kr">
       <body className={inter.className}>
-        <div className="container px-4 sm:px-6 lg:px-8 box-border overflow-auto">
+        <div className="relative box-border overflow-auto">
           <QueryProvider>
             <SessionProvider>
               {children}
