@@ -10,7 +10,9 @@ import { PageLayout, MainHeader } from "@/app/shared/components";
 import {
   DetailHeaderSection,
   DetailBodySection,
+  DetailCreditsSection,
 } from "@/app/features/movie/sections";
+import { ReviewFormSection } from "@/app/features/review/sections";
 
 export default async function Page({
   params,
@@ -32,6 +34,8 @@ export default async function Page({
       <DetailHeaderSection movieId={params.id} />
       <PageLayout header={<MainHeader />} isPaddingTop={false}>
         <DetailBodySection movieId={params.id} />
+        <DetailCreditsSection movieId={params.id} />
+        <ReviewFormSection />
       </PageLayout>
     </HydrationBoundary>
   );
