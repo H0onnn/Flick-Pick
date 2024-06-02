@@ -1,18 +1,26 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 // import { getServerSession } from "next-auth/next";
 // import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 // import { Session } from "next-auth";
+import { useSession } from "next-auth/react";
+import { useScroll } from "@/app/shared/hooks";
 import Image from "next/image";
 import Link from "next/link";
 import IMAGES from "@/public/images";
-import { Flex, Header } from "@/app/shared/components";
+import {
+  Flex,
+  Header,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/app/shared/components";
 import { LoginModal } from "@/app/features/auth/components";
 import { SearchInput } from "@/app/features/search/components";
 
 export const MainHeader = () => {
   const { data: session, status } = useSession();
+  const { isScrolled } = useScroll();
 
   return (
     <Header
@@ -26,20 +34,17 @@ export const MainHeader = () => {
           <SearchInput />
           {status === "authenticated" ? (
             <Link href={`user/${session.user?.id}`}>
-              <div className="relative w-[34px] h-[34px] rounded-full sm-max:hidden border border-border border-solid">
-                <Image
-                  src={session.user?.image!}
-                  alt="프로필 사진"
-                  fill={true}
-                  className="object-cover rounded-full"
-                />
-              </div>
+              <Avatar className="sm-max:hidden border border-border border-solid">
+                <AvatarImage src={session.user?.image!} />
+                <AvatarFallback>{session.user?.name}</AvatarFallback>
+              </Avatar>
             </Link>
           ) : (
             <LoginModal />
           )}
         </Flex>
       }
+      className={`transition-all duration-300 ease-in-out ${isScrolled ? "bg-white" : "bg-transparent"} border-b-0`}
     >
       {null}
     </Header>
