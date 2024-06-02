@@ -1,8 +1,4 @@
-"use client";
-
 import Link from "next/link";
-
-import { useGetMoviesByUpComing } from "../queries";
 import { MovieCard } from "./movie-card";
 import {
   Carousel,
@@ -13,12 +9,17 @@ import {
 } from "@/app/shared/components";
 
 import Autoplay from "embla-carousel-autoplay";
+import { MovieList } from "@/app/shared/types";
 
-export const UpComingCarousel = () => {
-  const { movieListByUpComing, isFetching } = useGetMoviesByUpComing();
+interface MainCarouselProps {
+  type?: "default" | "upcoming";
+  movieList: MovieList["results"];
+}
 
-  if (!movieListByUpComing || isFetching) return null;
-
+export const MainCarousel = ({
+  type = "default",
+  movieList,
+}: MainCarouselProps) => {
   return (
     <Carousel
       plugins={[
@@ -34,20 +35,25 @@ export const UpComingCarousel = () => {
     >
       <CarouselPrevious className="-left-4 top-[40%] z-10 hidden sm:flex" />
       <CarouselContent className="pb-16">
-        {movieListByUpComing.results.map((movie) => (
+        {movieList.map((movie, idx) => (
           <CarouselItem
             key={movie.id}
             className="
-              basis-[calc(100%/3)] sm:basis-[calc(100%/3)] md:basis-[calc(100%/4)] lg:basis-[calc(100%/5)] 
-              h-[calc((100vw-16px)/3*1.5)] sm:h-[calc((100vw-16px)/3*1.5)] md:h-[calc((100vw-16px)/4*1.5)] lg:h-[calc((100vw-16px)/5*1.3)]
-              "
+                  basis-[calc(100%/3)] sm:basis-[calc(100%/3)] md:basis-[calc(100%/4)] lg:basis-[calc(100%/5)] 
+                  h-[calc((100vw-16px)/3*1.5)] sm:h-[calc((100vw-16px)/3*1.5)] md:h-[calc((100vw-16px)/4*1.5)] lg:h-[calc((100vw-16px)/5*1.3)]
+                  "
           >
             <Link href={`movie/${movie.id}`}>
               <MovieCard
-                type="upcoming"
+                type={type}
                 poster_path={movie.poster_path}
+                rank={type === "default" ? idx + 1 : undefined}
                 title={movie.title}
-                release_date={movie.release_date}
+                release_date={
+                  type === "default"
+                    ? movie.release_date.split("-")[0]
+                    : movie.release_date
+                }
                 vote_average={Number(movie.vote_average.toFixed(1))}
               />
             </Link>
