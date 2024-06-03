@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "db:generate": "npx prisma generate",
+    "db:generate": "npx prisma generate --schema=./app/prisma/schema.prisma",
     "db:pull": "npx prisma db pull",
     "db:push": "npx prisma db push",
     "add:ui": "npx shadcn-ui@latest add"
