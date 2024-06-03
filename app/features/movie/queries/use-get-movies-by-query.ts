@@ -1,7 +1,8 @@
+import { useMemo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { MovieList } from "@/app/shared/types";
 
-const TMDB_ACCESS_TOKEN = process.env.TMDB_ACCESS_TOKEN;
+const TMDB_ACCESS_TOKEN = process.env.NEXT_PUBLIC_TMDB_ACCESS_TOKEN;
 
 const fetchMoviesByQuery = async ({
   value,
@@ -36,7 +37,7 @@ export const useGetMoviesByQuery = ({ value }: { value: string }) => {
         fetchMoviesByQuery({ value, page: pageParam as number }),
       initialPageParam: 1,
       getNextPageParam: (lastPage, allPages) => {
-        if (lastPage.total_pages < lastPage.page) {
+        if (lastPage.total_pages <= lastPage.page) {
           return undefined;
         }
 
@@ -52,8 +53,29 @@ export const useGetMoviesByQuery = ({ value }: { value: string }) => {
     }
   };
 
+  // 중복된 영화 제목 제거
+  const uniqueMovies = useMemo(() => {
+    if (!data) {
+      return [];
+    }
+
+    return data.pages
+      .map((page) => page.results)
+      .flat()
+      .reduce(
+        (acc, movie) => {
+          if (!acc.find((m) => m.title === movie.title)) {
+            acc.push(movie);
+          }
+
+          return acc;
+        },
+        [] as MovieList["results"],
+      );
+  }, [data]);
+
   return {
-    movies: data?.pages.flatMap((page) => page.results),
+    movies: uniqueMovies,
     handleFetchNextPage,
     isFetching,
   };
