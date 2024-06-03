@@ -22,10 +22,10 @@ export const DetailBodySection = ({
           </CardContent>
         </Card>
 
-        <Flex direction="column" className="pt-5 sm:py-5">
+        <Flex direction="column" justify="center" className="pt-5 sm:py-5">
           <p className="head2 mb-2">줄거리</p>
           <p className="body2 text-gray-500">{movieDetail.overview}</p>
-          <Flex className="mt-7 gap-2 flex-col sm:flex-row">
+          <Flex className="mt-7 gap-8 flex-col sm:flex-row">
             <Flex
               direction="column"
               align="center"
