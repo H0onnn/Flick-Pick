@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Movie } from "@/app/shared/types";
+import { Movie } from "@/app/features/movie/models";
 import { Flex, Badge, Card, CardContent } from "@/app/shared/components";
 
 interface MovieCardProps

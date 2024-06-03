@@ -12,7 +12,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 
-import { MovieList } from "@/app/shared/types";
+import { MovieList } from "@/app/features/movie/models";
 
 export const MainBannerCarousel = ({ movieList }: { movieList: MovieList }) => {
   return (

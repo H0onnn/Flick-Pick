@@ -11,7 +11,7 @@ import {
 } from "@/app/shared/components";
 
 import Autoplay from "embla-carousel-autoplay";
-import { MovieList } from "@/app/shared/types";
+import { MovieList } from "@/app/features/movie/models";
 
 interface MainCarouselProps {
   type?: "default" | "upcoming" | "related";
