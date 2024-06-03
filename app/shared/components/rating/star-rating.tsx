@@ -6,7 +6,7 @@ import ICONS from "@/app/public/icons";
 import { Flex } from "@/app/shared/components";
 
 interface StarRatingProps {
-  rating: number;
+  rating?: number;
   // eslint-disable-next-line no-unused-vars
   onChange?: (value: number) => void;
   size?: number;
@@ -26,7 +26,7 @@ const calculateStarValue = (
 export const StarRating = ({
   size = 32,
   onChange,
-  rating: defaultRating,
+  rating: defaultRating = 0,
 }: StarRatingProps) => {
   const [rating, setRating] = useState<number | null>(defaultRating);
   const [hover, setHover] = useState<number | null>(null);
