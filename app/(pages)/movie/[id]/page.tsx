@@ -5,7 +5,7 @@ import {
   DetailCreditsSection,
   DetailRelatedSection,
 } from "@/app/features/movie/sections";
-import { ReviewFormSection } from "@/app/features/review/sections";
+import { DetailReviewSection } from "@/app/features/review/sections";
 import { getMovieDetail } from "@/app/features/movie/queries";
 
 export default async function Page({
@@ -22,8 +22,11 @@ export default async function Page({
       <DetailHeaderSection movieDetail={movieDetail} />
       <PageLayout header={<MainHeader />} isPaddingTop={false}>
         <DetailBodySection movieDetail={movieDetail} />
+
         <DetailCreditsSection movieDetail={movieDetail} />
-        <ReviewFormSection />
+
+        <DetailReviewSection />
+
         <DetailRelatedSection
           title={movieDetail.title}
           genreIds={movieDetail.genres.map((genre) => genre.id)}
