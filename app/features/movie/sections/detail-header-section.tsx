@@ -20,22 +20,24 @@ export const DetailHeaderSection = ({
 
         <Flex
           direction="column"
-          className="absolute left-3 bottom-5 sm:left-10 sm:bottom-10 text-white gap-3 font-light"
+          className="absolute bottom-5 sm:bottom-10 text-white gap-3 font-light w-full"
         >
-          <h1 className="head1">{movieDetail.title}</h1>
+          <div className="container mx-auto">
+            <h1 className="head1">{movieDetail.title}</h1>
 
-          <Flex direction="column" className="gap-1.5">
-            <p>{movieDetail.original_title}</p>
-            <Flex className="gap-1">
-              <p>{movieDetail.release_date}</p>•
-              <p>{`${movieDetail.genres[0].name}/${movieDetail.genres[1].name}`}</p>
-              •<p>{movieDetail.production_countries[0].name}</p>
+            <Flex direction="column" className="gap-1.5">
+              <p>{movieDetail.original_title}</p>
+              <Flex className="gap-1">
+                <p>{movieDetail.release_date}</p>•
+                <p>{`${movieDetail.genres[0].name}/${movieDetail.genres[1].name}`}</p>
+                •<p>{movieDetail.production_countries[0].name}</p>
+              </Flex>
             </Flex>
-          </Flex>
-          <Flex align="center" className="gap-1">
-            <p>{formatHour(movieDetail.runtime)}</p>•
-            <p>TMDB 평점 {Number(movieDetail.vote_average.toFixed(1))}점</p>
-          </Flex>
+            <Flex align="center" className="gap-1">
+              <p>{formatHour(movieDetail.runtime)}</p>•
+              <p>TMDB 평점 {Number(movieDetail.vote_average.toFixed(1))}점</p>
+            </Flex>
+          </div>
         </Flex>
       </div>
     </section>
