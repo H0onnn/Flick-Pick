@@ -1,7 +1,4 @@
-"use client";
-
 import { useMemo } from "react";
-import { useMovieDetail } from "../queries";
 import {
   Flex,
   Carousel,
@@ -11,17 +8,20 @@ import {
   CarouselPrevious,
 } from "@/app/shared/components";
 import { CreditsCard } from "../components";
+import { MovieDetail } from "@/app/shared/types";
 
-export const DetailCreditsSection = ({ movieId }: { movieId: string }) => {
-  const { movieInfo } = useMovieDetail({ id: movieId });
-
+export const DetailCreditsSection = ({
+  movieDetail,
+}: {
+  movieDetail: MovieDetail;
+}) => {
   const director = useMemo(() => {
-    if (!movieInfo) return null;
+    if (!movieDetail) return null;
 
-    return movieInfo.credits.crew.find((crew) => crew.job === "Director");
-  }, [movieInfo]);
+    return movieDetail.credits.crew.find((crew) => crew.job === "Director");
+  }, [movieDetail]);
 
-  if (!movieInfo) return null;
+  if (!movieDetail) return null;
 
   return (
     <section className="pt-12">
@@ -45,7 +45,7 @@ export const DetailCreditsSection = ({ movieId }: { movieId: string }) => {
                     profilePath={director?.profile_path || ""}
                   />
                 </li>
-                {movieInfo.credits.cast.slice(0, 7).map((cast) => (
+                {movieDetail.credits.cast.slice(0, 7).map((cast) => (
                   <li key={cast.id} className="w-full sm:w-1/2 lg:w-1/4 mb-6">
                     <CreditsCard
                       crewName={cast.name}
