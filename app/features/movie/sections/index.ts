@@ -5,3 +5,4 @@ export * from "./main-banner-section";
 export * from "./detail-header-section";
 export * from "./detail-body-section";
 export * from "./detail-credits-section";
+export * from "./detail-related-section";
