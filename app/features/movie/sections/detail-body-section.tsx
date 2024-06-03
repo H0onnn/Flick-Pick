@@ -1,14 +1,13 @@
 import Image from "next/image";
 import { Card, CardContent, Flex, StarRating } from "@/app/shared/components";
-import { MovieDetail } from "@/app/shared/types";
+import { ReviewForm } from "@/app/features/review/components";
+import { MovieDetail } from "@/app/features/movie/models";
 
 export const DetailBodySection = ({
   movieDetail,
 }: {
   movieDetail: MovieDetail;
 }) => {
-  // TODO: 평균 평점, 그래프
-
   return (
     <section className="pt-6">
       <Flex className="flex-col sm:flex-row gap-6">
@@ -40,7 +39,7 @@ export const DetailBodySection = ({
               <p className="label3">{`${movieDetail.vote_count.toLocaleString()}개의 별점`}</p>
               <StarRating rating={Math.floor(movieDetail.vote_average / 2)} />
             </Flex>
-            <div className="w-full h-[150px] bg-gray-200">그래프</div>
+            <ReviewForm />
           </Flex>
         </Flex>
       </Flex>

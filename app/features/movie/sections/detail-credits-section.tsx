@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/app/shared/components";
 import { CreditsCard } from "../components";
-import { MovieDetail } from "@/app/shared/types";
+import { MovieDetail } from "@/app/features/movie/models";
 
 export const DetailCreditsSection = ({
   movieDetail,

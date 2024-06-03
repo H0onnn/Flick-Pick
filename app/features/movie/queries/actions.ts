@@ -1,6 +1,6 @@
 "use server";
 
-import { MovieDetail, MovieList } from "@/app/shared/types";
+import { MovieDetail, MovieList } from "@/app/features/movie/models";
 
 const TMDB_API_URL = process.env.TMDB_API_URL;
 const TMDB_ACCESS_TOKEN = process.env.TMDB_ACCESS_TOKEN;

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { MovieDetail } from "@/app/shared/types";
+import { MovieDetail } from "@/app/features/movie/models";
 
 const TMDB_API_URL = process.env.TMDB_API_URL;
 const TMDB_ACCESS_TOKEN = process.env.TMDB_ACCESS_TOKEN;
