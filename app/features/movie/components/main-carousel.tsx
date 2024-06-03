@@ -14,7 +14,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { MovieList } from "@/app/shared/types";
 
 interface MainCarouselProps {
-  type?: "default" | "upcoming";
+  type?: "default" | "upcoming" | "related";
   movieList: MovieList["results"];
 }
 
@@ -45,7 +45,7 @@ export const MainCarousel = ({
                   h-[calc((100vw-16px)/3*1.5)] sm:h-[calc((100vw-16px)/3*1.5)] md:h-[calc((100vw-16px)/4*1.5)] lg:h-[calc((100vw-16px)/5*1.3)]
                   "
           >
-            <Link href={`movie/${movie.id}`}>
+            <Link href={`/movie/${movie.id}`}>
               <MovieCard
                 type={type}
                 poster_path={movie.poster_path}
