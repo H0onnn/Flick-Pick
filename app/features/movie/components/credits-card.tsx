@@ -16,20 +16,23 @@ export const CreditsCard = ({
   return (
     <Flex className="gap-2">
       <Card className="relative w-[56px] h-[56px] border-border border-solid border-2 overflow-hidden">
-        <CardContent
-          className={`flex items-center justify-center ${profilePath ? "" : "bg-gray-100"}`}
-        >
-          {profilePath ? (
-            <Image
-              src={`https://image.tmdb.org/t/p/w500/${profilePath}`}
-              className="object-cover w-full h-full rounded-md"
-              fill={true}
-              alt="감독/출연진"
-            />
-          ) : (
-            <UserRound size={32} className="text-gray-300" />
-          )}
-        </CardContent>
+        <Flex align="center" justify="center">
+          <CardContent className={profilePath ? "" : "bg-gray-100"}>
+            {profilePath ? (
+              <Image
+                src={`https://image.tmdb.org/t/p/w500/${profilePath}`}
+                className="object-cover w-full h-full rounded-md"
+                fill={true}
+                alt="감독/출연진"
+              />
+            ) : (
+              <UserRound
+                size={32}
+                className="text-gray-300 transform translate-y-1/3"
+              />
+            )}
+          </CardContent>
+        </Flex>
       </Card>
       <Flex direction="column" className="py-1.5 gap-1 body2">
         <p>{crewName}</p>
