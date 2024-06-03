@@ -5,9 +5,10 @@ import { useState } from "react";
 import ICONS from "@/app/public/icons";
 import { Flex } from "@/app/shared/components";
 
-interface Props {
+interface StarRatingProps {
+  rating: number;
   // eslint-disable-next-line no-unused-vars
-  onChange: (value: number) => void;
+  onChange?: (value: number) => void;
   size?: number;
 }
 
@@ -22,29 +23,37 @@ const calculateStarValue = (
   return offsetX < rect.width / 2 ? index + 0.5 : index + 1;
 };
 
-export const StarRating = ({ size = 32, onChange }: Props) => {
-  const [rating, setRating] = useState<number | null>(null);
+export const StarRating = ({
+  size = 32,
+  onChange,
+  rating: defaultRating,
+}: StarRatingProps) => {
+  const [rating, setRating] = useState<number | null>(defaultRating);
   const [hover, setHover] = useState<number | null>(null);
 
   const updateStarRating = (value: number) => {
     setRating(value);
-    onChange(value);
+    onChange?.(value);
   };
 
   const handleStarClick = (
     index: number,
     e: React.MouseEvent<HTMLSpanElement>,
   ) => {
-    const selectedValue = calculateStarValue(index, e);
-    updateStarRating(selectedValue);
+    if (onChange) {
+      const selectedValue = calculateStarValue(index, e);
+      updateStarRating(selectedValue);
+    }
   };
 
   const handleMouseOver = (
     index: number,
     e: React.MouseEvent<HTMLSpanElement>,
   ) => {
-    const hoverValue = calculateStarValue(index, e);
-    setHover(hoverValue);
+    if (onChange) {
+      const hoverValue = calculateStarValue(index, e);
+      setHover(hoverValue);
+    }
   };
 
   const renderStar = (index: number) => {
