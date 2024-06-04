@@ -10,3 +10,4 @@ export * from "./avatar";
 export * from "./command";
 export * from "./popover";
 export * from "./textarea";
+export * from "./dropdown-menu";
