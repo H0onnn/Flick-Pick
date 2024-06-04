@@ -10,10 +10,12 @@ import { PostReviewDto, Review } from "@/app/features/review/models";
 export const postReview = async (body: PostReviewDto): Promise<void> => {
   const session = await getServerSession(authOptions);
 
+  if (!session) return;
+
   await prisma.review.create({
     data: {
       ...body,
-      userId: session?.user?.id as string,
+      userId: session.user?.id as string,
     },
   });
 
