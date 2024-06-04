@@ -25,17 +25,17 @@ export const DetailHeaderSection = ({
           <div className="container mx-auto">
             <h1 className="head1">{movieDetail.title}</h1>
 
-            <Flex direction="column" className="gap-1.5">
+            <Flex direction="column" className="gap-2">
               <p>{movieDetail.original_title}</p>
               <Flex className="gap-1">
                 <p>{movieDetail.release_date}</p>•
                 <p>{`${movieDetail.genres[0].name}/${movieDetail.genres[1].name}`}</p>
                 •<p>{movieDetail.production_countries[0].name}</p>
               </Flex>
-            </Flex>
-            <Flex align="center" className="gap-1">
-              <p>{formatHour(movieDetail.runtime)}</p>•
-              <p>TMDB 평점 {Number(movieDetail.vote_average.toFixed(1))}점</p>
+              <Flex align="center" className="gap-1">
+                <p>{formatHour(movieDetail.runtime)}</p>•
+                <p>TMDB 평점 {Number(movieDetail.vote_average.toFixed(1))}점</p>
+              </Flex>
             </Flex>
           </div>
         </Flex>
