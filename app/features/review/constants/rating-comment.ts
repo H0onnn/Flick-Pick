@@ -11,3 +11,5 @@ export const RATING_COMMENT = {
   4.5: "취향 저격 탕탕!",
   5.0: "설명이 필요 없는 갓띵작",
 } as const;
+
+export type RatingCommentType = keyof typeof RATING_COMMENT;
