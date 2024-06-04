@@ -27,7 +27,7 @@ export default function RootLayout({
           <QueryProvider>
             <SessionProvider>
               {children}
-              <Toaster richColors={true} theme="system" />
+              <Toaster richColors={true} theme="light" />
             </SessionProvider>
           </QueryProvider>
         </div>
