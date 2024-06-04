@@ -12,15 +12,18 @@ import {
 } from "@/app/shared/components";
 import { ReviewDeleteDialog } from "./review-delete-dialog";
 import { PencilLine, Trash2, SquareArrowOutUpRight, X } from "lucide-react";
+import { PostReviewDto } from "@/app/features/review/models";
 
 interface ReviewActionButtonsProps {
   isEditing: boolean;
   onEdit: React.Dispatch<React.SetStateAction<boolean>>;
+  onDelete: React.Dispatch<React.SetStateAction<PostReviewDto>>;
 }
 
 export const ReviewActionButtons = ({
   isEditing,
   onEdit,
+  onDelete,
 }: ReviewActionButtonsProps) => {
   const { onOpen, isOpen } = useDialog();
 
@@ -60,7 +63,7 @@ export const ReviewActionButtons = ({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {isOpen && <ReviewDeleteDialog />}
+      {isOpen && <ReviewDeleteDialog onDelete={onDelete} />}
     </>
   );
 };

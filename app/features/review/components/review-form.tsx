@@ -1,14 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useTransition } from "react";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import { toast } from "sonner";
 import { Textarea, Button, Flex, StarRating } from "@/app/shared/components";
 import { ReviewActionButtons } from "./review-action-buttons";
+import { Loader2 } from "lucide-react";
 
-import { PostReviewDto } from "@/app/features/review/models";
+import { PostReviewDto, Review } from "@/app/features/review/models";
 import {
   RATING_COMMENT,
   RatingCommentType,
@@ -17,69 +18,71 @@ import {
 import {
   postReview,
   updateReview,
-  getMyReviewByMovie,
 } from "@/app/features/review/queries/actions";
 
-// TODO: useOptimistic, useTransition & textarea, button disabled
-
-export const ReviewForm = () => {
+export const ReviewForm = ({ initialReview }: { initialReview: Review }) => {
   const params = useParams<{ id: string }>();
   const { data: session, status } = useSession();
 
+  const [isPending, startTransition] = useTransition();
+
   const [isEditing, setIsEditing] = useState(false);
   const [formValues, setFormValues] = useState<PostReviewDto>({
-    rating: 0,
-    comment: "",
     userId: "",
     movieId: params.id,
+    rating: initialReview?.rating ?? 0,
+    comment: initialReview?.comment ?? "",
   });
 
-  useEffect(() => {
-    if (status === "unauthenticated") return;
-
-    const fetchMyReview = async () => {
-      if (status === "authenticated") {
-        const review = await getMyReviewByMovie(params.id);
-        if (review) {
-          setFormValues({
-            rating: review.rating,
-            comment: review.comment,
-            userId: review.userId,
-            movieId: review.movieId,
-          });
-        }
-      }
-    };
-
-    fetchMyReview();
-  }, [params.id, status]);
-
   const handleSubmit = async () => {
-    if (isEditing) {
-      try {
-        await updateReview(formValues);
-        toast.success("리뷰가 수정되었어요 :)");
-        setIsEditing(false);
-        return;
-      } catch (e) {
-        if (e instanceof Error) {
-          toast.error("리뷰 수정 중 오류가 발생했어요 :(", {
-            description: e.message,
-          });
-        }
-      }
+    if (
+      initialReview &&
+      formValues.rating === initialReview.rating &&
+      formValues.comment === initialReview.comment
+    ) {
+      isEditing && setIsEditing(false);
+      return;
     }
 
-    try {
-      await postReview(formValues);
-      toast.success("리뷰가 성공적으로 작성되었어요 :)");
-    } catch (e) {
-      if (e instanceof Error) {
-        toast.error("리뷰 작성 중 오류가 발생했어요 :(", {
-          description: e.message,
-        });
+    startTransition(async () => {
+      if (isEditing) {
+        try {
+          await updateReview(formValues);
+          toast.success("리뷰가 수정되었어요 :)");
+          setIsEditing(false);
+        } catch (e) {
+          if (e instanceof Error) {
+            toast.error("리뷰 수정 중 오류가 발생했어요 :(", {
+              description: e.message,
+            });
+          }
+        }
+      } else {
+        try {
+          await postReview(formValues);
+          toast.success("리뷰가 등록되었어요 :)");
+        } catch (e) {
+          if (e instanceof Error) {
+            toast.error("리뷰 작성 중 오류가 발생했어요 :(", {
+              description: e.message,
+            });
+          }
+        }
       }
+    });
+  };
+
+  const handleEditCancel = () => {
+    if (initialReview) {
+      setFormValues({
+        ...formValues,
+        rating: initialReview.rating,
+        comment: initialReview.comment,
+      });
+      setIsEditing(false);
     }
+
+    setIsEditing(false);
   };
 
   return (
@@ -118,13 +121,19 @@ export const ReviewForm = () => {
               setFormValues({ ...formValues, comment: e.target.value })
             }
             maxLength={500}
-            disabled={status === "unauthenticated"}
+            disabled={
+              status === "unauthenticated" ||
+              (status === "authenticated" && !!initialReview && !isEditing)
+            }
           />
 
           <Flex align="center" justify="between" className="gap-3 w-full">
-            {status === "authenticated" && (
-              <p className="label3 -mt-6">{formValues.comment.length}/500</p>
-            )}
+            <p className="label3 -mt-6">
+              {status === "authenticated"
+                ? `${formValues.comment.length}/500`
+                : ""}
+            </p>
+
             <Flex align="center" className={isEditing ? "gap-3" : "gap-6"}>
               {isEditing ? (
                 <Button
@@ -132,7 +141,7 @@ export const ReviewForm = () => {
                   variant="outline"
                   size="sm"
                   className="w-12"
-                  onClick={() => setIsEditing(false)}
+                  onClick={handleEditCancel}
                 >
                   취소
                 </Button>
@@ -140,6 +149,7 @@ export const ReviewForm = () => {
                 <ReviewActionButtons
                   isEditing={isEditing}
                   onEdit={setIsEditing}
+                  onDelete={setFormValues}
                 />
               )}
               <Button
@@ -148,11 +158,16 @@ export const ReviewForm = () => {
                 disabled={
                   status === "unauthenticated" ||
                   !formValues.rating ||
-                  !formValues.comment
+                  !formValues.comment ||
+                  isPending
                 }
                 className="w-12"
               >
-                등록
+                {isPending ? (
+                  <Loader2 size={24} className="animate-spin" />
+                ) : (
+                  "등록"
+                )}
               </Button>
             </Flex>
           </Flex>

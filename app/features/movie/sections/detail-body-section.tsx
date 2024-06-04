@@ -2,12 +2,18 @@ import Image from "next/image";
 import { Card, CardContent, Flex, StarRating } from "@/app/shared/components";
 import { ReviewForm } from "@/app/features/review/components";
 import { MovieDetail } from "@/app/features/movie/models";
+import { Review } from "@/app/features/review/models";
+import { getMyReviewByMovie } from "@/app/features/review/queries";
 
-export const DetailBodySection = ({
+export const DetailBodySection = async ({
   movieDetail,
 }: {
   movieDetail: MovieDetail;
 }) => {
+  const myReview = (await getMyReviewByMovie(
+    movieDetail.id.toString(),
+  )) as Review;
+
   return (
     <section className="pt-6">
       <Flex className="flex-col sm:flex-row gap-6">
@@ -39,7 +45,7 @@ export const DetailBodySection = ({
               <p className="label3">{`${movieDetail.vote_count.toLocaleString()}개의 별점`}</p>
               <StarRating rating={Math.floor(movieDetail.vote_average / 2)} />
             </Flex>
-            <ReviewForm />
+            <ReviewForm initialReview={myReview} />
           </Flex>
         </Flex>
       </Flex>
