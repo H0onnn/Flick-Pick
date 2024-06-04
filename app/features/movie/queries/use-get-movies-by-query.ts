@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { MovieList } from "@/app/shared/types";
+import { MovieList } from "@/app/features/movie/models";
 
 const TMDB_ACCESS_TOKEN = process.env.NEXT_PUBLIC_TMDB_ACCESS_TOKEN;
 
