@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import ICONS from "@/app/public/icons";
 import { Flex } from "@/app/shared/components";
@@ -26,21 +26,10 @@ const calculateStarValue = (
 export const StarRating = ({
   size = 32,
   onChange,
-  rating: defaultRating,
+  rating: initialRating,
 }: StarRatingProps) => {
-  const [rating, setRating] = useState<number | null>(null);
+  const [rating, setRating] = useState<number | null>(initialRating ?? null);
   const [hover, setHover] = useState<number | null>(null);
-
-  // TODO: useEffect 미사용
-
-  // 초기 값 설정
-  useEffect(() => {
-    if (defaultRating === undefined) return;
-
-    if (defaultRating && defaultRating > 0) {
-      setRating(defaultRating);
-    }
-  }, [defaultRating]);
 
   const updateStarRating = (value: number) => {
     setRating(value);
