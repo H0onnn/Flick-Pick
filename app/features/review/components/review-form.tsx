@@ -49,8 +49,10 @@ export const ReviewForm = () => {
           </p>
           <StarRating
             rating={formValues.rating}
-            onChange={(value) =>
-              setFormValues({ ...formValues, rating: value })
+            onChange={
+              status === "authenticated"
+                ? (rating) => setFormValues({ ...formValues, rating })
+                : undefined
             }
           />
         </Flex>
