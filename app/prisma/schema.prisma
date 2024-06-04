@@ -61,7 +61,7 @@ model VerificationToken {
 }
 model Review {
   id        String   @id @default(cuid()) // 리뷰 고유 아이디
-  rating    Int // 리뷰 평점
+  rating    Float // 리뷰 평점
   comment   String // 리뷰 내용
   createdAt DateTime @default(now()) // 리뷰 작성일
   updatedAt DateTime @updatedAt // 리뷰 수정일
