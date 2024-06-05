@@ -146,11 +146,13 @@ export const ReviewForm = ({ initialReview }: { initialReview: Review }) => {
                   취소
                 </Button>
               ) : (
-                <ReviewActionButtons
-                  isEditing={isEditing}
-                  onEdit={setIsEditing}
-                  onDelete={setFormValues}
-                />
+                !!initialReview && (
+                  <ReviewActionButtons
+                    isEditing={isEditing}
+                    onEdit={setIsEditing}
+                    onDelete={setFormValues}
+                  />
+                )
               )}
               <Button
                 type="submit"
