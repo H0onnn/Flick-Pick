@@ -4,6 +4,7 @@ import prisma from "@/app/shared/lib/prisma";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { revalidatePath } from "next/cache";
+import { cache } from "react";
 import { PostReviewDto, Review } from "@/app/features/review/models";
 
 // 리뷰 작성
@@ -76,39 +77,41 @@ export const deleteReview = async (movieId: string): Promise<void> => {
 };
 
 // 가장 최근 작성된 리뷰 3개 조회
-export const getRecentReviews = async (): Promise<Review[]> => {
+export const getRecentReviews = cache(async (): Promise<Review[]> => {
   return await prisma.review.findMany({
     take: 3,
     orderBy: {
       createdAt: "desc",
     },
   });
-};
+});
 
 // 영화에 대한 내 리뷰 조회
-export const getMyReviewByMovie = async (
-  movieId: string,
-): Promise<Review | null> => {
-  const session = await getServerSession(authOptions);
+export const getMyReviewByMovie = cache(
+  async (movieId: string): Promise<Review | null> => {
+    const session = await getServerSession(authOptions);
 
-  if (!session) return null;
+    if (!session) return null;
 
-  return await prisma.review.findFirst({
-    where: {
-      movieId,
-      userId: session.user?.id,
-    },
-  });
-};
+    return await prisma.review.findFirst({
+      where: {
+        movieId,
+        userId: session.user?.id,
+      },
+    });
+  },
+);
 
 // 영화 리뷰 조회
-export const getReviewsByMovie = async (movieId: string): Promise<Review[]> => {
-  return await prisma.review.findMany({
-    where: {
-      movieId,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-};
+export const getReviewsByMovie = cache(
+  async (movieId: string): Promise<Review[]> => {
+    return await prisma.review.findMany({
+      where: {
+        movieId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  },
+);
