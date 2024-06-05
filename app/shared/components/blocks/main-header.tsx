@@ -9,6 +9,7 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
+  ModeToggle,
 } from "@/app/shared/components";
 import { LoginModal } from "@/app/features/auth/components";
 import { SearchInput } from "@/app/features/search/components";
@@ -27,6 +28,7 @@ export const MainHeader = async () => {
       }
       rightSlot={
         <Flex align="center" justify="center" className="gap-3">
+          <ModeToggle />
           <SearchInput />
           {status === "authenticated" ? (
             <Link href={`user/${session?.user?.id}`}>

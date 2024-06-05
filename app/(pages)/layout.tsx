@@ -5,6 +5,7 @@ import "@/app/shared/styles";
 import {
   QueryClientPovider as QueryProvider,
   SessionProvider,
+  ThemeProvider,
 } from "../shared/provider";
 import { Footer, Toaster } from "../shared/components";
 
@@ -26,8 +27,10 @@ export default function RootLayout({
         <div className="relative box-border overflow-auto">
           <QueryProvider>
             <SessionProvider>
-              {children}
-              <Toaster richColors={true} theme="light" />
+              <ThemeProvider attribute="class" defaultTheme="system">
+                {children}
+                <Toaster richColors={true} theme="light" />
+              </ThemeProvider>
             </SessionProvider>
           </QueryProvider>
         </div>
