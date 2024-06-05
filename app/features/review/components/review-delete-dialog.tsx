@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useDialog } from "@/app/shared/hooks";
 
 import { toast } from "sonner";
@@ -23,6 +23,7 @@ interface ReviewDeleteDialogProps {
 
 export const ReviewDeleteDialog = ({ onDelete }: ReviewDeleteDialogProps) => {
   const params = useParams<{ id: string }>();
+  const router = useRouter();
   const { isOpen, onClose } = useDialog();
 
   const handleSubmit = async () => {
@@ -35,6 +36,7 @@ export const ReviewDeleteDialog = ({ onDelete }: ReviewDeleteDialogProps) => {
         comment: "",
       });
       onClose();
+      router.refresh();
       toast.success("리뷰가 삭제되었어요 :)");
     } catch (e) {
       if (e instanceof Error) {
