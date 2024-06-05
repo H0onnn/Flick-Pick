@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import ICONS from "@/app/public/icons";
 import { Flex } from "@/app/shared/components";
@@ -28,8 +28,18 @@ export const StarRating = ({
   onChange,
   rating: initialRating,
 }: StarRatingProps) => {
-  const [rating, setRating] = useState<number | null>(initialRating ?? null);
+  const [rating, setRating] = useState<number | null>(null);
   const [hover, setHover] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (initialRating === undefined) return;
+
+    if (initialRating && initialRating > 0) {
+      setRating(initialRating);
+    } else {
+      setRating(null);
+    }
+  }, [initialRating]);
 
   const updateStarRating = (value: number) => {
     setRating(value);
