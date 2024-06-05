@@ -35,7 +35,9 @@ export const ReviewForm = ({ initialReview }: { initialReview: Review }) => {
     comment: initialReview?.comment ?? "",
   });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (
       initialReview &&
       formValues.rating === initialReview.rating &&
