@@ -47,6 +47,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   reviews       Review[]
+  likes         Like[]
  
   @@map("users")
 }
@@ -59,15 +60,42 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map("verificationtokens")
 }
+
+model Movie {
+  id           String   @id @default(cuid()) // 영화 고유 아이디
+  title        String   // 영화 제목
+  overview     String  // 영화 줄거리
+  poster       String   // 영화 포스터 이미지 UR
+  releaseDate  String @map("release_date")  // 영화 개봉일 
+  createdAt    DateTime @default(now()) @map("created_at")  // 영화 등록일
+  reviews      Review[] // 영화에 대한 리뷰 목록
+  likes        Like[]   // 영화에 대한 좋아요 목록
+ 
+  @@map("movies") // 테이블 이름을 movies로 지정
+}
+
 model Review {
   id        String   @id @default(cuid()) // 리뷰 고유 아이디
   rating    Float // 리뷰 평점
   comment   String // 리뷰 내용
-  createdAt DateTime @default(now()) // 리뷰 작성일
-  updatedAt DateTime @updatedAt // 리뷰 수정일
+  createdAt DateTime @default(now()) @map("created_at")  // 리뷰 작성일
+  updatedAt DateTime @updatedAt @default(now()) @map("updated_at")  // 리뷰 수정일
   userId    String   @map("user_id") // 리뷰 작성자 고유 아이디
   movieId   String   @map("movie_id") // 리뷰 대상 영화의 고유 아이디
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movie     Movie    @relation(fields: [movieId], references: [id], onDelete: Cascade)
  
   @@map("reviews") // 테이블 이름을 reviews로 지정
+}
+
+model Like {
+  id        String   @id @default(cuid()) // 좋아요 고유 아이디
+  userId    String   @map("user_id") // 좋아요 누른 사용자 고유 아이디
+  movieId   String   @map("movie_id") // 좋아요 대상 영화의 고유 아이디
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movie     Movie    @relation(fields: [movieId], references: [id], onDelete: Cascade)
+ 
+  @@map("likes") // 테이블 이름을 likes로 지정
 }
