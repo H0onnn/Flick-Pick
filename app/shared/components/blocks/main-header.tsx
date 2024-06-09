@@ -27,7 +27,7 @@ export const MainHeader = async () => {
         </Link>
       }
       rightSlot={
-        <Flex align="center" justify="center" className="gap-3">
+        <Flex align="center" justify="center" className="sm-max:gap-0 gap-3">
           <ModeToggle />
           <SearchInput />
           {status === "authenticated" ? (
