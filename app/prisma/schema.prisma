@@ -48,6 +48,7 @@ model User {
   sessions      Session[]
   reviews       Review[]
   likes         Like[]
+  reviewLikes  ReviewLike[]
  
   @@map("users")
 }
@@ -85,6 +86,7 @@ model Review {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   movie     Movie    @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  likes     ReviewLike[] // 리뷰에 대한 좋아요 목록
  
   @@map("reviews") // 테이블 이름을 reviews로 지정
 }
@@ -98,4 +100,15 @@ model Like {
   movie     Movie    @relation(fields: [movieId], references: [id], onDelete: Cascade)
  
   @@map("likes") // 테이블 이름을 likes로 지정
+}
+
+model ReviewLike {
+  id        String   @id @default(cuid()) // 리뷰 좋아요 고유 아이디
+  userId    String   @map("user_id") // 리뷰 좋아요 누른 사용자 고유 아이디
+  reviewId  String   @map("review_id") // 좋아요 대상 리뷰의 고유 아이디
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review     Review    @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+ 
+  @@map("review_likes") // 테이블 이름을 review_likes로 지정
 }
