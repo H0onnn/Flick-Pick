@@ -1,8 +1,17 @@
+"use server";
+
 import { cache } from "react";
 import { MovieDetail, MovieList } from "@/app/features/movie/models";
+import prisma from "@/app/shared/lib/prisma";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/shared/lib/next-auth";
+import { revalidatePath } from "next/cache";
 
 const TMDB_API_URL = process.env.TMDB_API_URL;
 const TMDB_ACCESS_TOKEN = process.env.TMDB_ACCESS_TOKEN;
+
+const YOUTUBE_API_URL = process.env.YOUTUBE_API_URL;
+const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 
 // 현재 상영작
 export const getMoviesByNowPlaying = cache(async (): Promise<MovieList> => {
@@ -112,3 +121,103 @@ export const getMoviesByGenre = cache(
     return await response.json();
   },
 );
+
+// 유튜브 영화 예고편 검색
+export const getMovieTrailer = cache(async (query: string) => {
+  try {
+    const response = await fetch(
+      `${YOUTUBE_API_URL}?part=snippet&q=${query} 예고편&type=video&key=${YOUTUBE_API_KEY}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      },
+    );
+
+    return response.json();
+  } catch (error) {
+    return {
+      error: error,
+    };
+  }
+});
+
+// 영화 정보 저장
+export const saveMovie = async (movieDetail: MovieDetail): Promise<void> => {
+  // 중복 저장 방지
+  const existingMovie = await prisma.movie.findFirst({
+    where: {
+      id: String(movieDetail.id),
+    },
+  });
+
+  if (existingMovie) return;
+
+  await prisma.movie.create({
+    data: {
+      id: String(movieDetail.id),
+      title: movieDetail.title,
+      overview: movieDetail.overview,
+      poster: movieDetail.poster_path,
+      releaseDate: movieDetail.release_date,
+      createdAt: new Date(),
+    },
+  });
+};
+
+// 영화 좋아요 및 좋아요 취소
+export const toggleLikeMovie = async (formData: FormData): Promise<void> => {
+  const session = await getServerSession(authOptions);
+
+  if (!session) return;
+
+  const userId = session.user?.id as string;
+  const movieId = formData.get("movieId") as string;
+
+  const existingLike = await prisma.like.findFirst({
+    where: {
+      userId,
+      movieId,
+    },
+  });
+
+  if (existingLike) {
+    // 좋아요 취소
+    await prisma.like.delete({
+      where: {
+        id: existingLike.id,
+      },
+    });
+
+    revalidatePath(`/movie/${movieId}`);
+  } else {
+    // 좋아요 추가
+    await prisma.like.create({
+      data: {
+        userId,
+        movieId,
+      },
+    });
+
+    revalidatePath(`/movie/${movieId}`);
+  }
+};
+
+// 좋아요 여부 확인
+export const isLikedMovie = async (movieId: string): Promise<boolean> => {
+  const session = await getServerSession(authOptions);
+
+  if (!session) return false;
+
+  const userId = session.user?.id as string;
+
+  const existingLike = await prisma.like.findFirst({
+    where: {
+      userId,
+      movieId,
+    },
+  });
+
+  return !!existingLike;
+};
