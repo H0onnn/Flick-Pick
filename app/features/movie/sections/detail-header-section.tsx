@@ -29,7 +29,11 @@ export const DetailHeaderSection = ({
               <p>{movieDetail.original_title}</p>
               <Flex className="gap-1">
                 <p>{movieDetail.release_date}</p>•
-                <p>{`${movieDetail.genres[0].name}/${movieDetail.genres[1].name}`}</p>
+                {movieDetail.genres.length > 1 ? (
+                  <p>{`${movieDetail.genres[0].name}/${movieDetail.genres[1].name}`}</p>
+                ) : (
+                  <p>{movieDetail.genres[0].name}</p>
+                )}
                 •<p>{movieDetail.production_countries[0].name}</p>
               </Flex>
               <Flex align="center" className="gap-1">
