@@ -40,7 +40,7 @@ export const MovieCard = ({
       <Flex direction="column" className="mt-2 gap-1">
         <span className="label2 truncate">{title}</span>
         <Flex className="gap-1 label3 text-gray-500 hidden sm:flex">
-          {type === "default" || "related" ? (
+          {type !== "upcoming" ? (
             <>
               <span>{release_date.split("-")[0]}</span>
               <span>·</span>
