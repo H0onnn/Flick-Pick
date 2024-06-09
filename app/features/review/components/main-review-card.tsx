@@ -1,8 +1,14 @@
 import Image from "next/image";
-
+import {
+  Card,
+  Flex,
+  StarRating,
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  Separator,
+} from "@/app/shared/components";
 interface MainReviewCardProps {
-  reviewId: number;
-  movieId: number;
   movieTitle: string;
   moviePoster: string;
   review: string;
@@ -12,8 +18,6 @@ interface MainReviewCardProps {
 }
 
 export const MainReviewCard = ({
-  reviewId,
-  movieId,
   movieTitle,
   moviePoster,
   review,
@@ -22,31 +26,40 @@ export const MainReviewCard = ({
   rating,
 }: MainReviewCardProps) => {
   return (
-    <div className="relative bg-gray-200 rounded-lg">
-      <div className="relative w-full h-[200px]">
+    <Card className="flex flex-col w-full h-full shadow-0 p-3 border border-border border-solid rounded-lg">
+      <Flex align="center" justify="between">
+        <Flex align="center" className="gap-2">
+          <Avatar className="border border-border border-solid w-7 h-7">
+            <AvatarImage src={userProfile} />
+            <AvatarFallback>{userName}</AvatarFallback>
+          </Avatar>
+
+          <p className="label3">{userName}</p>
+        </Flex>
+
+        <StarRating rating={rating} size={14} />
+      </Flex>
+
+      <Flex className="gap-2 my-3 h-full">
         <Image
           src={moviePoster}
-          alt={movieTitle}
-          fill
-          className="object-cover w-full h-full rounded-t-lg"
+          alt="포스터"
+          className="object-contain"
+          width={80}
+          height={100}
         />
-      </div>
-      <div className="p-4">
-        <h3 className="text-lg font-semibold">{movieTitle}</h3>
-        <p className="text-sm mt-2">{review}</p>
-        <div className="flex items-center mt-4">
-          <Image
-            src={userProfile}
-            alt={userName}
-            fill
-            className="w-8 h-8 rounded-full"
-          />
-          <div className="ml-2">
-            <p className="text-sm font-semibold">{userName}</p>
-            <p className="text-sm text-accent">{rating}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+
+        <Flex direction="column" className="gap-2 p-2 w-full">
+          <p className="label2 text-gray-500 line-clamp-1">{movieTitle}</p>
+          <p className="body3 line-clamp-4">{review}</p>
+        </Flex>
+      </Flex>
+
+      <Separator />
+
+      <Flex align="center" className="mt-3 label3">
+        <p>좋아용</p>
+      </Flex>
+    </Card>
   );
 };
