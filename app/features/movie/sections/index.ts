@@ -6,3 +6,4 @@ export * from "./detail-header-section";
 export * from "./detail-body-section";
 export * from "./detail-credits-section";
 export * from "./detail-related-section";
+export * from "./detail-trailer-section";
