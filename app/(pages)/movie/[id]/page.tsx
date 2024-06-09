@@ -3,6 +3,7 @@ import {
   DetailHeaderSection,
   DetailBodySection,
   DetailCreditsSection,
+  DetailTrailerSection,
   DetailRelatedSection,
 } from "@/app/features/movie/sections";
 import { DetailReviewSection } from "@/app/features/review/sections";
@@ -24,6 +25,8 @@ export default async function Page({
         <DetailBodySection movieDetail={movieDetail} />
 
         <DetailCreditsSection movieDetail={movieDetail} />
+
+        <DetailTrailerSection movieId={params.id} />
 
         <DetailReviewSection />
 
