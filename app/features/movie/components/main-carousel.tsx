@@ -36,13 +36,13 @@ export const MainCarousel = ({
       }}
     >
       <CarouselPrevious className="-left-4 top-[40%] z-10 hidden sm:flex" />
-      <CarouselContent className="pb-16">
+      <CarouselContent>
         {movieList.map((movie, idx) => (
           <CarouselItem
             key={movie.id}
             className="
-                  basis-[calc(100%/3)] sm:basis-[calc(100%/3)] md:basis-[calc(100%/4)] lg:basis-[calc(100%/5)] 
-                  h-[calc((100vw-16px)/3*1.5)] sm:h-[calc((100vw-16px)/3*1.5)] md:h-[calc((100vw-16px)/4*1.5)] lg:h-[calc((100vw-16px)/5*1.3)]
+                  basis-1/3 sm:basis-1/3 md:basis-1/4 lg:basis-1/5
+                  aspect-[2/3] sm:aspect-[2/3] md:aspect-[2/3] lg:aspect-[2/3]
                   "
           >
             <Link href={`/movie/${movie.id}`}>

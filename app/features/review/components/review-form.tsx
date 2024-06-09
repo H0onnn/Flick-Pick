@@ -91,7 +91,7 @@ export const ReviewForm = ({ initialReview }: { initialReview: Review }) => {
   };
 
   return (
-    <Flex align="center" className="gap-8 w-full" asChild>
+    <Flex align="center" className="gap-8 w-full flex-col md:flex-row" asChild>
       <form onSubmit={handleSubmit}>
         <Flex
           direction="column"

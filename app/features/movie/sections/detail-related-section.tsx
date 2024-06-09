@@ -20,7 +20,7 @@ export const DetailRelatedSection = async ({
   if (filteredMovieList.length === 0) return null;
 
   return (
-    <section className="pt-6">
+    <section className="pt-12">
       <p className="head2 mb-2">이 작품과 비슷한 영화</p>
       <MainCarousel type="related" movieList={filteredMovieList} />
     </section>
