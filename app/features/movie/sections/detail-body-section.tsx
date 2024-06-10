@@ -1,6 +1,11 @@
 import Image from "next/image";
-import { Card, CardContent, Flex, StarRating } from "@/app/shared/components";
-import { MovieLikeButton } from "@/app/features/movie/components";
+import {
+  Card,
+  CardContent,
+  Flex,
+  StarRating,
+  LikeButton,
+} from "@/app/shared/components";
 import { ReviewForm } from "@/app/features/review/components";
 import { MovieDetail } from "@/app/features/movie/models";
 import { Review } from "@/app/features/review/models";
@@ -26,8 +31,10 @@ export const DetailBodySection = async ({
             />
           </CardContent>
 
-          <MovieLikeButton
-            movieId={String(movieDetail.id)}
+          <LikeButton
+            type="movie"
+            id={String(movieDetail.id)}
+            isLiked={movieDetail.isLiked}
             className="absolute top-3 left-3"
           />
         </Card>
