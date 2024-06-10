@@ -28,7 +28,7 @@ export default async function Page({
 
         <DetailTrailerSection movieId={params.id} />
 
-        <DetailReviewSection />
+        <DetailReviewSection movieId={params.id} />
 
         <DetailRelatedSection
           title={movieDetail.title}
