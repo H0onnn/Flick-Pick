@@ -15,7 +15,7 @@
     "add:ui": "npx shadcn-ui@latest add",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "postinstall": "npx prisma generate --schema=./app/prisma/schema.prisma"
+    "postinstall": "npx prisma generate --schema=./app/prisma/schema.prisma && npx prettier --write ."
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.2.0",
