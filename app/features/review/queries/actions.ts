@@ -1,8 +1,7 @@
 "use server";
 
 import prisma from "@/app/shared/lib/prisma";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/shared/lib/next-auth";
+import { getServerSession } from "@/app/shared/utils";
 import { revalidatePath } from "next/cache";
 import { cache } from "react";
 import { PostReviewDto, Review } from "@/app/features/review/models";
@@ -10,7 +9,7 @@ import { User } from "@/app/features/auth/models";
 
 // 리뷰 작성
 export const postReview = async (body: PostReviewDto): Promise<void> => {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   if (!session) return;
 
@@ -26,7 +25,7 @@ export const postReview = async (body: PostReviewDto): Promise<void> => {
 
 // 리뷰 수정
 export const updateReview = async (body: PostReviewDto): Promise<void> => {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   const targetReview = await prisma.review.findFirst({
     where: {
@@ -55,7 +54,7 @@ export const updateReview = async (body: PostReviewDto): Promise<void> => {
 
 // 리뷰 단일 삭제
 export const deleteReview = async (movieId: string): Promise<void> => {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   const targetReview = await prisma.review.findFirst({
     where: {
@@ -88,7 +87,7 @@ interface GetRecentReviewProps extends Review {
   };
 }
 
-// 가장 최근 작성된 리뷰 6개 조회
+// 가장 최근 작성된 리뷰 6개 조회 (메인 페이지)
 export const getRecentReviews = cache(
   async (): Promise<GetRecentReviewProps[]> => {
     return await prisma.review.findMany({
@@ -104,10 +103,10 @@ export const getRecentReviews = cache(
   },
 );
 
-// 영화에 대한 내 리뷰 조회
+// 영화에 대한 내 리뷰 조회 (마이 페이지)
 export const getMyReviewByMovie = cache(
   async (movieId: string): Promise<Review | null> => {
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession();
 
     if (!session) return null;
 
@@ -120,7 +119,29 @@ export const getMyReviewByMovie = cache(
   },
 );
 
-// 영화 리뷰 조회
+interface GetReviewProps extends Review {
+  user: User;
+}
+
+// 영화 리뷰 3개 조회 (상세 페이지)
+export const getReviewsByMovieLimit = cache(
+  async (movieId: string): Promise<GetReviewProps[]> => {
+    return await prisma.review.findMany({
+      take: 3,
+      where: {
+        movieId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        user: true,
+      },
+    });
+  },
+);
+
+// 영화 리뷰 조회 (전체 리스트)
 export const getReviewsByMovie = cache(
   async (movieId: string): Promise<Review[]> => {
     return await prisma.review.findMany({
@@ -133,3 +154,42 @@ export const getReviewsByMovie = cache(
     });
   },
 );
+
+// 리뷰 좋아요 토글
+export const toggleLikeReview = async (formData: FormData): Promise<void> => {
+  const session = await getServerSession();
+
+  if (!session) return;
+
+  const userId = session.user?.id as string;
+  const movieId = formData.get("movieId") as string;
+  const reviewId = formData.get("reviewId") as string;
+
+  const existingLike = await prisma.reviewLike.findFirst({
+    where: {
+      userId,
+      reviewId,
+    },
+  });
+
+  if (existingLike) {
+    // 좋아요 취소
+    await prisma.reviewLike.delete({
+      where: {
+        id: existingLike.id,
+      },
+    });
+
+    revalidatePath(`/movie/${movieId}`);
+  } else {
+    // 좋아요 추가
+    await prisma.reviewLike.create({
+      data: {
+        userId,
+        reviewId,
+      },
+    });
+
+    revalidatePath(`/movie/${movieId}`);
+  }
+};
