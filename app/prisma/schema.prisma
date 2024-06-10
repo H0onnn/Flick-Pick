@@ -80,7 +80,7 @@ model Review {
   rating    Float // 리뷰 평점
   comment   String // 리뷰 내용
   createdAt DateTime @default(now()) @map("created_at")  // 리뷰 작성일
-  updatedAt DateTime @updatedAt @default(now()) @map("updated_at")  // 리뷰 수정일
+  updatedAt DateTime? @updatedAt @default(now()) @map("updated_at")  // 리뷰 수정일
   userId    String   @map("user_id") // 리뷰 작성자 고유 아이디
   movieId   String   @map("movie_id") // 리뷰 대상 영화의 고유 아이디
 
