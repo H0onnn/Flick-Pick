@@ -13,6 +13,8 @@
     "db:pull": "npx prisma db pull --schema=./app/prisma/schema.prisma",
     "db:push": "npx prisma db push --schema=./app/prisma/schema.prisma",
     "add:ui": "npx shadcn-ui@latest add",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "postinstall": "npx prisma generate --schema=./app/prisma/schema.prisma"
   },
   "dependencies": {
