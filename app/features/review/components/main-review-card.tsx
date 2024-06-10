@@ -8,6 +8,7 @@ import {
   AvatarFallback,
   Separator,
 } from "@/app/shared/components";
+import { Heart } from "lucide-react";
 interface MainReviewCardProps {
   movieTitle: string;
   moviePoster: string;
@@ -15,6 +16,7 @@ interface MainReviewCardProps {
   userName: string;
   userProfile: string;
   rating: number;
+  likes: number;
 }
 
 export const MainReviewCard = ({
@@ -24,9 +26,10 @@ export const MainReviewCard = ({
   userName,
   userProfile,
   rating,
+  likes,
 }: MainReviewCardProps) => {
   return (
-    <Card className="flex flex-col w-full h-full shadow-0 p-3 border border-border border-solid rounded-lg">
+    <Card className="flex flex-col w-full h-full shadow-none p-3 border border-border border-solid rounded-lg">
       <Flex align="center" justify="between">
         <Flex align="center" className="gap-2">
           <Avatar className="border border-border border-solid w-7 h-7">
@@ -57,8 +60,9 @@ export const MainReviewCard = ({
 
       <Separator />
 
-      <Flex align="center" className="mt-3 label3">
-        <p>좋아용</p>
+      <Flex align="center" className="mt-3 gap-1">
+        <Heart size={18} className="text-red-500 fill-red-500" />
+        <span className="label3 text-gray-500">{likes}</span>
       </Flex>
     </Card>
   );

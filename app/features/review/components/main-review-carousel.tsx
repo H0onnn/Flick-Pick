@@ -34,6 +34,7 @@ export const MainReviewCarousel = async () => {
                 userName={review.user.name!}
                 userProfile={review.user.image!}
                 rating={review.rating}
+                likes={review.likes.length}
               />
             </Link>
           </CarouselItem>
