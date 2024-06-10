@@ -75,9 +75,26 @@ export const getMoviesByUpcoming = cache(async (): Promise<MovieList> => {
   return await response.json();
 });
 
+// 영화 좋아요 여부 확인
+export const isLikedMovie = cache(
+  async (userId: string, movieId: string): Promise<boolean> => {
+    const existingLike = await prisma.like.findFirst({
+      where: {
+        userId,
+        movieId,
+      },
+    });
+
+    return !!existingLike;
+  },
+);
+
 // 영화 상세 정보
 export const getMovieDetail = cache(
   async (id: string): Promise<MovieDetail> => {
+    const session = await getServerSession();
+    const userId = session?.user?.id;
+
     const response = await fetch(
       `${TMDB_API_URL}${id}?append_to_response=credits&language=ko-KR`,
       {
@@ -94,7 +111,16 @@ export const getMovieDetail = cache(
       throw new Error("영화 상세 정보를 불러오는데 실패했습니다.");
     }
 
-    return await response.json();
+    const movieDetail: MovieDetail = await response.json();
+
+    let isLiked = false;
+    if (userId) {
+      const existingLike = await isLikedMovie(userId, id);
+
+      isLiked = !!existingLike;
+    }
+
+    return { ...movieDetail, isLiked };
   },
 );
 
@@ -202,21 +228,3 @@ export const toggleLikeMovie = async (formData: FormData): Promise<void> => {
     revalidatePath(`/movie/${movieId}`);
   }
 };
-
-// 좋아요 여부 확인
-export const isLikedMovie = cache(async (movieId: string): Promise<boolean> => {
-  const session = await getServerSession();
-
-  if (!session) return false;
-
-  const userId = session.user?.id as string;
-
-  const existingLike = await prisma.like.findFirst({
-    where: {
-      userId,
-      movieId,
-    },
-  });
-
-  return !!existingLike;
-});

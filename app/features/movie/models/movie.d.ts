@@ -107,4 +107,5 @@ export interface MovieDetail {
   vote_average: number;
   vote_count: number;
   credits: Credits;
+  isLiked: boolean;
 }

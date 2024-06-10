@@ -76,6 +76,20 @@ export const deleteReview = async (movieId: string): Promise<void> => {
   revalidatePath(`/movie/${movieId}`);
 };
 
+// 리뷰 좋아요 여부 확인
+export const isLikedReview = cache(
+  async (userId: string, reviewId: string): Promise<boolean> => {
+    const existingLike = await prisma.reviewLike.findFirst({
+      where: {
+        userId,
+        reviewId,
+      },
+    });
+
+    return !!existingLike;
+  },
+);
+
 interface GetRecentReviewProps extends Review {
   user: User;
   movie: {
@@ -85,6 +99,9 @@ interface GetRecentReviewProps extends Review {
     poster: string;
     releaseDate: string;
   };
+  likes: {
+    id: string;
+  }[];
 }
 
 // 가장 최근 작성된 리뷰 6개 조회 (메인 페이지)
@@ -98,6 +115,7 @@ export const getRecentReviews = cache(
       include: {
         user: true,
         movie: true,
+        likes: true,
       },
     });
   },
@@ -121,12 +139,13 @@ export const getMyReviewByMovie = cache(
 
 interface GetReviewProps extends Review {
   user: User;
+  isLiked: boolean;
 }
 
 // 영화 리뷰 3개 조회 (상세 페이지)
 export const getReviewsByMovieLimit = cache(
   async (movieId: string): Promise<GetReviewProps[]> => {
-    return await prisma.review.findMany({
+    const reviews = await prisma.review.findMany({
       take: 3,
       where: {
         movieId,
@@ -138,20 +157,50 @@ export const getReviewsByMovieLimit = cache(
         user: true,
       },
     });
+
+    return await Promise.all(
+      reviews.map(async (review) => {
+        const isLiked = await isLikedReview(review.userId, review.id);
+
+        return {
+          ...review,
+          isLiked,
+        };
+      }),
+    );
   },
 );
 
+interface GetAllReviews extends Review {
+  user: User;
+  isLiked: boolean;
+}
+
 // 영화 리뷰 조회 (전체 리스트)
 export const getReviewsByMovie = cache(
-  async (movieId: string): Promise<Review[]> => {
-    return await prisma.review.findMany({
+  async (movieId: string): Promise<GetAllReviews[]> => {
+    const reviews = await prisma.review.findMany({
       where: {
         movieId,
       },
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        user: true,
+      },
     });
+
+    return await Promise.all(
+      reviews.map(async (review) => {
+        const isLiked = await isLikedReview(review.userId, review.id);
+
+        return {
+          ...review,
+          isLiked,
+        };
+      }),
+    );
   },
 );
 
@@ -162,8 +211,8 @@ export const toggleLikeReview = async (formData: FormData): Promise<void> => {
   if (!session) return;
 
   const userId = session.user?.id as string;
-  const movieId = formData.get("movieId") as string;
   const reviewId = formData.get("reviewId") as string;
+  const movieId = formData.get("movieId") as string;
 
   const existingLike = await prisma.reviewLike.findFirst({
     where: {
