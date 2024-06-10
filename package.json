@@ -13,7 +13,7 @@
     "db:pull": "npx prisma db pull --schema=./app/prisma/schema.prisma",
     "db:push": "npx prisma db push --schema=./app/prisma/schema.prisma",
     "add:ui": "npx shadcn-ui@latest add",
-    "postinstall": "npx prisma generate"
+    "postinstall": "npx prisma generate --schema=./app/prisma/schema.prisma"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.2.0",
