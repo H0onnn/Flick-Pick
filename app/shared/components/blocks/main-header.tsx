@@ -1,5 +1,4 @@
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/shared/lib/next-auth";
+import { getServerSession } from "@/app/shared/utils";
 import Image from "next/image";
 import Link from "next/link";
 import IMAGES from "@/app/public/images";
@@ -15,7 +14,7 @@ import { LoginModal } from "@/app/features/auth/components";
 import { SearchInput } from "@/app/features/search/components";
 
 export const MainHeader = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   const status = session ? "authenticated" : "unauthenticated";
 
