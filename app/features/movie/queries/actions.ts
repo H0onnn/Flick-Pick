@@ -3,8 +3,7 @@
 import { cache } from "react";
 import { MovieDetail, MovieList } from "@/app/features/movie/models";
 import prisma from "@/app/shared/lib/prisma";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/shared/lib/next-auth";
+import { getServerSession } from "@/app/shared/utils";
 import { revalidatePath } from "next/cache";
 
 const TMDB_API_URL = process.env.TMDB_API_URL;
@@ -168,7 +167,7 @@ export const saveMovie = async (movieDetail: MovieDetail): Promise<void> => {
 
 // 영화 좋아요 및 좋아요 취소
 export const toggleLikeMovie = async (formData: FormData): Promise<void> => {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   if (!session) return;
 
@@ -205,8 +204,8 @@ export const toggleLikeMovie = async (formData: FormData): Promise<void> => {
 };
 
 // 좋아요 여부 확인
-export const isLikedMovie = async (movieId: string): Promise<boolean> => {
-  const session = await getServerSession(authOptions);
+export const isLikedMovie = cache(async (movieId: string): Promise<boolean> => {
+  const session = await getServerSession();
 
   if (!session) return false;
 
@@ -220,4 +219,4 @@ export const isLikedMovie = async (movieId: string): Promise<boolean> => {
   });
 
   return !!existingLike;
-};
+});
