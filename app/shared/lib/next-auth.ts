@@ -1,9 +1,10 @@
-import { type AuthOptions } from "next-auth";
+import { type Session } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import KakaoProvider from "next-auth/providers/kakao";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/app/shared/lib/prisma";
 
-export const authOptions: AuthOptions = {
+export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     KakaoProvider({
@@ -16,7 +17,7 @@ export const authOptions: AuthOptions = {
     strategy: "jwt" as const,
   },
   callbacks: {
-    session: ({ session, token }) => ({
+    session: ({ session, token }: { session: Session; token: JWT }) => ({
       ...session,
       user: {
         ...session.user,
