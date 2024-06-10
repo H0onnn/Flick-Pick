@@ -10,7 +10,7 @@ export interface Review {
   rating: number;
   comment: string;
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt: Date | null;
   userId: string;
   movieId: string;
 }
