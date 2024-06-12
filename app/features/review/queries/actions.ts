@@ -145,6 +145,10 @@ interface GetReviewProps extends Review {
 // 영화 리뷰 3개 조회 (상세 페이지)
 export const getReviewsByMovieLimit = cache(
   async (movieId: string): Promise<GetReviewProps[]> => {
+    const session = await getServerSession();
+
+    const userId = session?.user?.id ?? "";
+
     const reviews = await prisma.review.findMany({
       take: 3,
       where: {
@@ -160,7 +164,7 @@ export const getReviewsByMovieLimit = cache(
 
     return await Promise.all(
       reviews.map(async (review) => {
-        const isLiked = await isLikedReview(review.userId, review.id);
+        const isLiked = await isLikedReview(userId, review.id);
 
         return {
           ...review,
