@@ -7,7 +7,7 @@ import {
   DetailRelatedSection,
 } from "@/app/features/movie/sections";
 import { DetailReviewSection } from "@/app/features/review/sections";
-import { getMovieDetail } from "@/app/features/movie/queries";
+import { getMovieDetail, saveMovie } from "@/app/features/movie/queries";
 
 export default async function Page({
   params,
@@ -17,6 +17,7 @@ export default async function Page({
   };
 }) {
   const movieDetail = await getMovieDetail(params.id);
+  await saveMovie(movieDetail);
 
   return (
     <>

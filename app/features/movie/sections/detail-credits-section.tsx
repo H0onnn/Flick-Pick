@@ -1,10 +1,9 @@
 "use client";
 
-import { useMemo, useEffect } from "react";
+import { useMemo } from "react";
 import { Flex } from "@/app/shared/components";
 import { CreditsCard } from "../components";
 import { MovieDetail } from "@/app/features/movie/models";
-import { saveMovie } from "../queries";
 
 export const DetailCreditsSection = ({
   movieDetail,
@@ -16,14 +15,6 @@ export const DetailCreditsSection = ({
 
     return movieDetail.credits.crew.find((crew) => crew.job === "Director");
   }, [movieDetail]);
-
-  useEffect(() => {
-    const saveMovieDetail = async () => {
-      await saveMovie(movieDetail);
-    };
-
-    saveMovieDetail();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section className="pt-12">
