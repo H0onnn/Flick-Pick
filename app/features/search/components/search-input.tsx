@@ -36,7 +36,7 @@ export const SearchInput = () => {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild disabled={true}>
         <Button
           variant="outline"
           role="combobox"
