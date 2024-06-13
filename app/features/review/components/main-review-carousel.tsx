@@ -18,7 +18,7 @@ export const MainReviewCarousel = async () => {
       opts={{
         align: "start",
         watchDrag: true,
-        slidesToScroll: 2,
+        slidesToScroll: 1,
         duration: 40,
       }}
     >
