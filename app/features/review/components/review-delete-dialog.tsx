@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useDialog } from "@/app/shared/hooks";
 
 import { toast } from "sonner";
@@ -23,20 +23,17 @@ interface ReviewDeleteDialogProps {
 
 export const ReviewDeleteDialog = ({ onDelete }: ReviewDeleteDialogProps) => {
   const params = useParams<{ id: string }>();
-  const router = useRouter();
   const { isOpen, onClose } = useDialog();
 
   const handleSubmit = async () => {
     try {
       await deleteReview(params.id);
-      onDelete({
-        userId: "",
-        movieId: "",
+      onDelete((prev) => ({
+        ...prev,
         rating: 0,
         comment: "",
-      });
+      }));
       onClose();
-      router.refresh();
       toast.success("리뷰가 삭제되었어요 :)");
     } catch (e) {
       if (e instanceof Error) {
@@ -49,26 +46,24 @@ export const ReviewDeleteDialog = ({ onDelete }: ReviewDeleteDialogProps) => {
 
   return (
     <Dialog onOpenChange={onClose} open={isOpen} defaultOpen={isOpen}>
-      <form action={handleSubmit}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>리뷰를 삭제하시겠어요?</DialogTitle>
-          </DialogHeader>
-          <DialogDescription>
-            삭제한 리뷰는 복구할 수 없습니다.
-            <br />
-            정말 삭제하시겠어요?
-          </DialogDescription>
-          <DialogFooter>
-            <Button type="button" variant="outline" size="sm" onClick={onClose}>
-              취소
-            </Button>
-            <Button type="submit" size="sm" onClick={handleSubmit}>
-              삭제
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </form>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>리뷰를 삭제하시겠어요?</DialogTitle>
+        </DialogHeader>
+        <DialogDescription>
+          삭제한 리뷰는 복구할 수 없습니다.
+          <br />
+          정말 삭제하시겠어요?
+        </DialogDescription>
+        <DialogFooter>
+          <Button type="button" variant="outline" size="sm" onClick={onClose}>
+            취소
+          </Button>
+          <Button type="submit" size="sm" onClick={handleSubmit}>
+            삭제
+          </Button>
+        </DialogFooter>
+      </DialogContent>
     </Dialog>
   );
 };

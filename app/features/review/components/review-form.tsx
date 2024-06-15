@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import { toast } from "sonner";
@@ -22,7 +22,7 @@ import {
 
 export const ReviewForm = ({ initialReview }: { initialReview: Review }) => {
   const params = useParams<{ id: string }>();
-  const router = useRouter();
+
   const { data: session, status } = useSession();
 
   const [isPending, startTransition] = useTransition();
@@ -52,7 +52,6 @@ export const ReviewForm = ({ initialReview }: { initialReview: Review }) => {
         try {
           await updateReview(formValues);
           toast.success("리뷰가 수정되었어요 :)");
-          router.refresh();
           setIsEditing(false);
         } catch (e) {
           if (e instanceof Error) {
@@ -65,7 +64,6 @@ export const ReviewForm = ({ initialReview }: { initialReview: Review }) => {
         try {
           await postReview(formValues);
           toast.success("리뷰가 등록되었어요 :)");
-          router.refresh();
         } catch (e) {
           if (e instanceof Error) {
             toast.error("리뷰 작성 중 오류가 발생했어요 :(", {
