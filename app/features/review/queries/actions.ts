@@ -137,7 +137,7 @@ export const getMyReviewByMovie = cache(
   },
 );
 
-interface GetReviewProps extends Review {
+export interface GetReviewProps extends Review {
   user: User;
   isLiked: boolean;
 }
@@ -175,7 +175,7 @@ export const getReviewsByMovieLimit = cache(
   },
 );
 
-interface GetAllReviews extends Review {
+export interface GetAllReviews extends Review {
   user: User;
   isLiked: boolean;
 }

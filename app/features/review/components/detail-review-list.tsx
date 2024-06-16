@@ -1,11 +1,13 @@
 import { Flex, NonDataFallback } from "@/app/shared/components";
-import { getReviewsByMovieLimit } from "../queries";
+import { GetReviewProps } from "../queries";
 import { DetailReviewCard } from "./detail-review-card";
 import { MessageCircleOff } from "lucide-react";
 
-export const DetailReviewList = async ({ movieId }: { movieId: string }) => {
-  const reviews = await getReviewsByMovieLimit(movieId);
+interface DetailReviewListProps {
+  reviews: GetReviewProps[];
+}
 
+export const DetailReviewList = ({ reviews }: DetailReviewListProps) => {
   if (reviews.length === 0)
     return (
       <NonDataFallback
@@ -25,7 +27,7 @@ export const DetailReviewList = async ({ movieId }: { movieId: string }) => {
         <DetailReviewCard
           key={review.id}
           id={review.id}
-          movieId={movieId}
+          movieId={review.movieId}
           review={review.comment}
           userName={review.user.name!}
           userProfile={review.user.image!}
