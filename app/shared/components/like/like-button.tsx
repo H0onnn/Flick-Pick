@@ -1,4 +1,4 @@
-import { cn } from "@/app/shared/lib/utils";
+import { cn } from "@/app/shared/utils";
 import { Heart } from "lucide-react";
 import { toggleLikeMovie } from "@/app/features/movie/queries";
 import { toggleLikeReview } from "@/app/features/review/queries";
