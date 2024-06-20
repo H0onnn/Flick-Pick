@@ -14,7 +14,7 @@ import {
   Flex,
 } from "@/app/shared/components/ui";
 import { ReviewCardSkeleton } from "./review-card-skeleton";
-import { GetAllReviews, getReviewsByMovie } from "../queries";
+import { GetAllReviews, getReviewsByMovie } from "../apis";
 
 interface DetailReviewDialogProps {
   isOpen: boolean;

@@ -1,6 +1,6 @@
 import { request } from "./utils";
 
-const API_VARS = {
+export const API_VARS = {
   BASE_URL: process.env.NEXT_PUBLIC_API_URL as string,
   TMDB_API_URL: process.env.TMDB_API_URL as string,
   TMDM_TOKEN: process.env.TMDB_ACCESS_TOKEN as string,

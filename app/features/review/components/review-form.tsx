@@ -15,10 +15,7 @@ import {
   RatingCommentType,
 } from "@/app/features/review/constants";
 
-import {
-  postReview,
-  updateReview,
-} from "@/app/features/review/queries/actions";
+import { postNewReview, updateReview } from "../apis";
 
 export const ReviewForm = ({ initialReview }: { initialReview: Review }) => {
   const params = useParams<{ id: string }>();
@@ -62,7 +59,7 @@ export const ReviewForm = ({ initialReview }: { initialReview: Review }) => {
         }
       } else {
         try {
-          await postReview(formValues);
+          await postNewReview(formValues);
           toast.success("리뷰가 등록되었어요 :)");
         } catch (e) {
           if (e instanceof Error) {

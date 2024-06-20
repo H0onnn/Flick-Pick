@@ -1,6 +1,6 @@
 import { NonDataFallback } from "@/app/shared/components";
 import { TrailerIframe } from "../components";
-import { getMovieDetail, getMovieTrailer } from "../queries";
+import { getMovieDetail, getMovieTrailer } from "../apis";
 import { Youtube } from "lucide-react";
 
 export const DetailTrailerSection = async ({

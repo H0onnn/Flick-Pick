@@ -1,6 +1,6 @@
 import { Flex } from "@/app/shared/components";
 import { MainCarousel } from "../components";
-import { getMoviesByTopRated } from "../queries/actions";
+import { getMoviesByTopRated } from "../apis";
 
 export const TopRatedSection = async () => {
   const movieListByTopRated = await getMoviesByTopRated();

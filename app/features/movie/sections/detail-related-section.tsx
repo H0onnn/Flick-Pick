@@ -1,4 +1,4 @@
-import { getMoviesByGenre } from "../queries";
+import { getMoviesByGenre } from "../apis";
 import { MainCarousel } from "../components";
 
 interface DetailRelatedSectionProps {

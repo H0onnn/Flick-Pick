@@ -14,7 +14,7 @@ import {
   DialogTitle,
 } from "@/app/shared/components/ui";
 
-import { deleteReview } from "@/app/features/review/queries/actions";
+import { deleteReview } from "../apis";
 import { PostReviewDto } from "@/app/features/review/models";
 
 interface ReviewDeleteDialogProps {
