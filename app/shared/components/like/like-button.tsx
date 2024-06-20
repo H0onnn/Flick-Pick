@@ -1,3 +1,5 @@
+// TODO: refactoring components to use shared components
+
 import { cn } from "@/app/shared/utils";
 import { Heart } from "lucide-react";
 import { toggleLikeMovie } from "@/app/features/movie/apis";
