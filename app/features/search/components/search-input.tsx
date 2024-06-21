@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useGetMoviesByQuery } from "@/app/features/movie/apis";
+import { useGetMoviesByQuery } from "../apis";
 import { useDebounce, useObserver } from "@/app/shared/hooks";
 
 import { cn } from "@/app/shared/utils";

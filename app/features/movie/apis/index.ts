@@ -6,4 +6,3 @@ export * from "./getMoviesByTopRated";
 export * from "./getMoviesByUpcoming";
 export * from "./saveMovie";
 export * from "./toggleLikeMovie";
-export * from "./use-get-movies-by-query";
