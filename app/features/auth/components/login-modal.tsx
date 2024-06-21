@@ -1,6 +1,10 @@
 "use client";
 
+import { cn } from "@/app/shared/utils";
+
 import { useScroll } from "@/app/shared/hooks";
+import { useTheme } from "next-themes";
+
 import Image from "next/image";
 import IMAGES from "@/app/public/images";
 import ICONS from "@/app/public/icons";
@@ -13,11 +17,16 @@ import {
   Button,
   Flex,
 } from "@/app/shared/components";
+
 import { toast } from "sonner";
+
 import { signIn } from "next-auth/react";
 
 export const LoginModal = () => {
   const { isScrolled } = useScroll();
+  const { theme } = useTheme();
+
+  console.log(theme);
 
   const handleLogin = async (provider: string) => {
     try {
@@ -33,11 +42,15 @@ export const LoginModal = () => {
 
   return (
     <Dialog>
-      <form>
+      <form onSubmit={() => handleLogin("kakao")}>
         <DialogTrigger asChild>
           <Button
             variant="link"
-            className={`head6sb ${isScrolled === false && "text-white"}`}
+            className={cn(
+              "head6sb",
+              isScrolled === false && "text-white",
+              theme === "dark" && isScrolled === true && "text-slate-700",
+            )}
           >
             로그인/가입
           </Button>
@@ -55,7 +68,6 @@ export const LoginModal = () => {
           <Button
             type="submit"
             className="bg-kakao mt-6 py-6 hover:bg-kakao/70"
-            onClick={() => handleLogin("kakao")}
           >
             <Flex align="center" justify="center" className="w-full gap-2">
               <Image

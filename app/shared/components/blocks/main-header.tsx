@@ -30,7 +30,7 @@ export const MainHeader = async () => {
           <ModeToggle />
           <SearchInput />
           {status === "authenticated" ? (
-            <Link href={`user/${session?.user?.id}`}>
+            <Link href={`/user/info/${session?.user?.id}`}>
               <Avatar className="sm-max:hidden border border-border border-solid">
                 <AvatarImage src={session?.user?.image!} />
                 <AvatarFallback>{session?.user?.name}</AvatarFallback>
