@@ -1,5 +1,5 @@
 import { Flex, NonDataFallback } from "@/app/shared/components";
-import { GetReviewProps } from "../queries";
+import { GetReviewProps } from "../apis";
 import { DetailReviewCard } from "./detail-review-card";
 import { MessageCircleOff } from "lucide-react";
 

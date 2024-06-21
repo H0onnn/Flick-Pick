@@ -9,7 +9,7 @@ import {
 import { ReviewForm } from "@/app/features/review/components";
 import { MovieDetail } from "@/app/features/movie/models";
 import { Review } from "@/app/features/review/models";
-import { getMyReviewByMovie } from "@/app/features/review/queries";
+import { getMyReviewByMovie } from "@/app/features/review/apis";
 
 export const DetailBodySection = async ({
   movieDetail,

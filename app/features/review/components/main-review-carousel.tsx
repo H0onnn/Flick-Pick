@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/app/shared/components";
 import { MainReviewCard } from "./main-review-card";
-import { getRecentReviews } from "@/app/features/review/queries";
+import { getRecentReviews } from "@/app/features/review/apis";
 
 export const MainReviewCarousel = async () => {
   const reviews = await getRecentReviews();

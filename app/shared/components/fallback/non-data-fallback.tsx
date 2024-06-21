@@ -1,5 +1,5 @@
 import { Card } from "@/app/shared/components";
-import { cn } from "@/app/shared/lib/utils";
+import { cn } from "@/app/shared/utils";
 
 interface NonDataFallbackProps {
   icon?: React.ReactNode;

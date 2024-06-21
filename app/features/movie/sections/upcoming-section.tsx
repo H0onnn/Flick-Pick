@@ -1,6 +1,6 @@
 import { Flex } from "@/app/shared/components";
 import { MainCarousel } from "../components";
-import { getMoviesByUpcoming } from "../queries/actions";
+import { getMoviesByUpcoming } from "../apis";
 
 export const UpComingSection = async () => {
   const movieListByUpcoming = await getMoviesByUpcoming();

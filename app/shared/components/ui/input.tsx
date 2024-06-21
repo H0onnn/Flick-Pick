@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/app/shared/lib/utils";
+import { cn } from "@/app/shared/utils";
 import { cva } from "class-variance-authority";
 import { forwardRef } from "react";
 import { XCircleIcon } from "lucide-react";

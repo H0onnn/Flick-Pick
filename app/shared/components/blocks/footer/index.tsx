@@ -1,8 +1,8 @@
-import Link from "next/link";
 import Image from "next/image";
 import IMAGES from "@/app/public/images";
 
-import { Flex } from "../ui";
+import { Flex } from "../../ui";
+import { SnsIcon } from "./sns-icon";
 
 export const Footer = () => {
   return (
@@ -12,33 +12,47 @@ export const Footer = () => {
           <Flex align="center" className="gap-2 pb-2">
             <p>Made by JeongHun</p>
 
-            <Link
+            <SnsIcon
+              trigger={
+                <Image
+                  src={IMAGES.GIT_LOGO}
+                  alt="github"
+                  className="w-6 h-6 rounded-full"
+                />
+              }
+              icon={IMAGES.GIT_LOGO}
+              title="GitHub"
+              description="Visit my GitHub profile to see more projects"
               href="https://github.com/H0onnn"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image src={IMAGES.GIT_LOGO} alt="github" className="w-6 h-6" />
-            </Link>
+            />
 
-            <Link
+            <SnsIcon
+              trigger={
+                <Image
+                  src={IMAGES.VELOG_LOGO}
+                  alt="velog"
+                  className="w-6 h-6 rounded-full"
+                />
+              }
+              icon={IMAGES.VELOG_LOGO}
+              title="Velog"
+              description="Visit my Velog to see my articles"
               href="https://velog.io/@hoonnn"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src={IMAGES.VELOG_LOGO}
-                alt="velog"
-                className="w-6 h-6 rounded-full"
-              />
-            </Link>
+            />
 
-            <Link
+            <SnsIcon
+              trigger={
+                <Image
+                  src={IMAGES.GMAIL_LOGO}
+                  alt="gmail"
+                  className="w-6 h-6 rounded-full"
+                />
+              }
+              icon={IMAGES.GMAIL_LOGO}
+              title="Gmail"
+              description="Contact me via email"
               href="mailto:dukei201248@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image src={IMAGES.GMAIL_LOGO} alt="gmail" className="w-6 h-6" />
-            </Link>
+            />
           </Flex>
 
           <p className="pt-3">

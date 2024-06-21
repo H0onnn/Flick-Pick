@@ -13,3 +13,4 @@ export * from "./textarea";
 export * from "./dropdown-menu";
 export * from "./theme-toggle";
 export * from "./separator";
+export * from "./hover-card";

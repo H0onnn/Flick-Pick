@@ -1,7 +1,9 @@
-import { cn } from "@/app/shared/lib/utils";
+// TODO: refactoring components to use shared components
+
+import { cn } from "@/app/shared/utils";
 import { Heart } from "lucide-react";
-import { toggleLikeMovie } from "@/app/features/movie/queries";
-import { toggleLikeReview } from "@/app/features/review/queries";
+import { toggleLikeMovie } from "@/app/features/movie/apis";
+import { toggleLikeReview } from "@/app/features/review/apis";
 
 interface LikeButtonProps {
   id: string;

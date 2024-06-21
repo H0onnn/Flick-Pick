@@ -2,7 +2,7 @@
 
 import { useScroll } from "@/app/shared/hooks";
 
-import { cn } from "@/app/shared/lib/utils";
+import { cn } from "@/app/shared/utils";
 
 type HeaderProps = {
   children: React.ReactNode;

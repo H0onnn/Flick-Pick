@@ -1,6 +1,6 @@
 import { Flex } from "@/app/shared/components";
 import { DetailReviewList, MoreReviewButton } from "../components";
-import { getReviewsByMovieLimit } from "../queries";
+import { getReviewsByMovieLimit } from "../apis";
 
 export const DetailReviewSection = async ({ movieId }: { movieId: string }) => {
   const reviewsByLimit = await getReviewsByMovieLimit(movieId);

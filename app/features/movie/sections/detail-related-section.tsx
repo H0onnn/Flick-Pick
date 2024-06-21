@@ -1,4 +1,4 @@
-import { getMoviesByGenre } from "../queries";
+import { getMoviesByGenre } from "../apis";
 import { MainCarousel } from "../components";
 
 interface DetailRelatedSectionProps {
@@ -10,7 +10,7 @@ export const DetailRelatedSection = async ({
   title,
   genreIds,
 }: DetailRelatedSectionProps) => {
-  const movieList = await getMoviesByGenre(genreIds, 1);
+  const movieList = await getMoviesByGenre(genreIds);
 
   // title이 같은 영화 제거
   const filteredMovieList = (movieList.results = movieList.results.filter(

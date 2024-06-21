@@ -1,6 +1,6 @@
 import { Flex } from "@/app/shared/components";
 import { MainCarousel } from "../components";
-import { getMoviesByNowPlaying } from "../queries/actions";
+import { getMoviesByNowPlaying } from "../apis";
 
 export const NowPlayingSection = async () => {
   const movieListByNowPlaying = await getMoviesByNowPlaying();

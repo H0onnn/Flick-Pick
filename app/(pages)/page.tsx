@@ -1,5 +1,3 @@
-export const revalidate = 60; // 1분 마다 캐싱 데이터 갱신
-
 import { PageLayout, MainHeader } from "@/app/shared/components";
 import {
   MainBannerSection,
