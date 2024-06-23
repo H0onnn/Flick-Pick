@@ -62,7 +62,7 @@ export const MainReviewCard = ({
 
       <Flex align="center" className="mt-3 gap-1">
         <Heart size={18} className="text-red-500 fill-red-500" />
-        <span className="label3 text-gray-500">{likes}</span>
+        <span className="label3 text-gray-500">{likes}명이 공감했어요</span>
       </Flex>
     </Card>
   );

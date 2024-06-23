@@ -58,7 +58,7 @@ export const Footer = () => {
           <p className="pt-3">
             해당 사이트는 포트폴리오 목적으로 제작되었습니다.
           </p>
-          <p>© 2024. All rights reserved.</p>
+          <p>© 2024. All rights reserved By JeongHun.</p>
         </Flex>
 
         <Flex direction="column">

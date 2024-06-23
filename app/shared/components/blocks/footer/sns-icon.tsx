@@ -28,7 +28,7 @@ export const SnsIcon = ({
     <HoverCard>
       <HoverCardTrigger asChild>{trigger}</HoverCardTrigger>
       <HoverCardContent className="w-80">
-        <div className="flex justify-between space-x-4">
+        <div className="flex space-x-4">
           <div className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
             <Image src={icon} alt={title} fill />
           </div>
