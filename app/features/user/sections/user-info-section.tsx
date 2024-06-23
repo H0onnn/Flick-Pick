@@ -7,7 +7,7 @@ import {
   Flex,
 } from "@/app/shared/components";
 
-import { SignoutButton } from "../components";
+import { SignoutButton, WithrawButton } from "../components";
 import { getMyActives } from "../apis";
 
 export const UserInfoSection = async () => {
@@ -51,7 +51,11 @@ export const UserInfoSection = async () => {
           </Flex>
         </Flex>
 
-        <SignoutButton />
+        <Flex align="center" justify="center" className="space-x-2 w-full">
+          <SignoutButton />
+
+          <WithrawButton />
+        </Flex>
       </section>
     </Flex>
   );
