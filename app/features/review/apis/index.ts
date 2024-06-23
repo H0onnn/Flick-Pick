@@ -6,3 +6,4 @@ export * from "./getMyReviewsByMovie";
 export * from "./getReviewsByMovie";
 export * from "./getRecentReviews";
 export * from "./getReviewsByMovieLimit";
+export * from "./getMyReviewsToMyPage";
