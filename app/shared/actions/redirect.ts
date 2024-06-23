@@ -2,6 +2,6 @@
 
 import { redirect } from "next/navigation";
 
-export const redirectTo = (path: string) => {
+export const redirectTo = async (path: string) => {
   redirect(path);
 };

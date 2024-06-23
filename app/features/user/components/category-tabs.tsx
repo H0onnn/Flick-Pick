@@ -15,14 +15,12 @@ export const CategoryTabs = () => {
   const [isSelected, setIsSelected] = useState({
     review: category === "review",
     wishlist: category === "wishlist",
-    comment: category === "comment",
   });
 
   const handleSelect = (key: string) => {
     setIsSelected({
       review: false,
       wishlist: false,
-      comment: false,
       [key]: true,
     });
 
@@ -35,21 +33,14 @@ export const CategoryTabs = () => {
         active={isSelected.review}
         onClick={() => handleSelect("review")}
       >
-        리뷰
+        내 리뷰
       </TabButton>
 
       <TabButton
         active={isSelected.wishlist}
         onClick={() => handleSelect("wishlist")}
       >
-        찜
-      </TabButton>
-
-      <TabButton
-        active={isSelected.comment}
-        onClick={() => handleSelect("comment")}
-      >
-        댓글
+        찜한 작품
       </TabButton>
     </Flex>
   );
