@@ -1,18 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 import { Flex, TabButton } from "@/app/shared/components";
 
 export const CategoryTabs = () => {
   const params = useParams<{ id: string }>();
+  const searchParams = useSearchParams();
   const router = useRouter();
 
+  const category = searchParams.get("category");
+
   const [isSelected, setIsSelected] = useState({
-    review: true,
-    wishlist: false,
-    comment: false,
+    review: category === "review",
+    wishlist: category === "wishlist",
+    comment: category === "comment",
   });
 
   const handleSelect = (key: string) => {
