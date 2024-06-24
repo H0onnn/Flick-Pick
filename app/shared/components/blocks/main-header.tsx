@@ -11,7 +11,10 @@ import {
   ModeToggle,
 } from "@/app/shared/components";
 import { LoginModal } from "@/app/features/auth/components";
-import { SearchInput } from "@/app/features/search/components";
+import {
+  HeaderSearchButton,
+  SearchInput,
+} from "@/app/features/search/components";
 
 export const MainHeader = async () => {
   const session = await getServerSession();
@@ -28,6 +31,7 @@ export const MainHeader = async () => {
       rightSlot={
         <Flex align="center" justify="center" className="sm-max:gap-0 gap-3">
           <ModeToggle />
+          <HeaderSearchButton />
           <SearchInput />
           {status === "authenticated" ? (
             <Link href={`/user/info/${session?.user?.id}`}>

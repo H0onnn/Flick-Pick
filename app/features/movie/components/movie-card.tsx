@@ -31,7 +31,7 @@ export const MovieCard = ({
           <Image
             src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
             alt="영화 포스터"
-            className="w-full h-full rounded-sm"
+            className="rounded-sm"
             fill={true}
           />
         </CardContent>
