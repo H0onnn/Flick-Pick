@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { useGetMoviesByQuery } from "../apis";
-import { useDebounce, useObserver } from "@/app/shared/hooks";
+import Link from "next/link";
+
+import { useState, useEffect } from "react";
+import { getMoviesByQuery } from "../apis";
+import { useDebounce } from "@/app/shared/hooks";
 
 import { cn } from "@/app/shared/utils";
 
@@ -21,22 +23,39 @@ import {
 } from "@/app/shared/components";
 
 import { Check, Search, LoaderCircleIcon } from "lucide-react";
-
-// TODO: truncate가 적용이 안되는 이슈, 반응형 검색창, 무한스크롤이 맛탱이 감
+import { Movie } from "../../movie/models";
 
 export const SearchInput = () => {
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const debouncedSearchValue = useDebounce(searchValue);
-  const { movies, isFetching, handleFetchNextPage } = useGetMoviesByQuery({
-    value: debouncedSearchValue,
-  });
 
-  const pageRef = useObserver(() => handleFetchNextPage());
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [isFetching, setIsFetching] = useState(false);
+
+  const debouncedSearchValue = useDebounce(searchValue);
+
+  useEffect(() => {
+    if (!debouncedSearchValue) {
+      setMovies([]);
+      return;
+    }
+
+    const fetchMovies = async () => {
+      const { results } = await getMoviesByQuery({
+        query: debouncedSearchValue,
+      });
+
+      setMovies((prev) => [...prev, ...results]);
+      setIsFetching(false);
+    };
+
+    setIsFetching(true);
+    fetchMovies();
+  }, [debouncedSearchValue]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild disabled={true}>
+      <PopoverTrigger asChild>
         <Button
           variant="outline"
           role="combobox"
@@ -54,7 +73,7 @@ export const SearchInput = () => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-72 sm-max:hidden p-0">
-        <Command className="w-full">
+        <Command>
           <CommandInput
             placeholder="영화를 검색해보세요."
             onValueChange={(currentValue) => setSearchValue(currentValue)}
@@ -72,27 +91,28 @@ export const SearchInput = () => {
             </CommandEmpty>
             <CommandGroup>
               {movies?.map((movie) => (
-                <CommandItem
-                  key={movie.id}
-                  value={movie.title}
-                  onSelect={(currentValue) => {
-                    setSearchValue(
-                      currentValue === searchValue ? "" : currentValue,
-                    );
-                    setOpen(false);
-                  }}
-                  className="w-full truncate"
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      searchValue === movie.title ? "opacity-100" : "opacity-0",
-                    )}
-                  />
-                  {movie.title}
-                </CommandItem>
+                <Link key={movie.id} href={`/movie/${movie.id}`}>
+                  <CommandItem
+                    value={movie.title}
+                    onSelect={(currentValue) => {
+                      setSearchValue(
+                        currentValue === searchValue ? "" : currentValue,
+                      );
+                      setOpen(false);
+                    }}
+                  >
+                    <Check
+                      className={cn(
+                        "mr-2 h-4 w-4",
+                        searchValue === movie.title
+                          ? "opacity-100"
+                          : "opacity-0",
+                      )}
+                    />
+                    {movie.title}
+                  </CommandItem>
+                </Link>
               ))}
-              <div ref={pageRef} className="h-px" />
               {isFetching && (
                 <Flex align="center" justify="center">
                   <LoaderCircleIcon
