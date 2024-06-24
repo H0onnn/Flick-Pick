@@ -4,13 +4,24 @@ export const useObserver = (callback: () => void) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined" || !window.IntersectionObserver) {
+      return;
+    }
+
     if (!contentRef.current) return;
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        callback();
-      }
-    }, options);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          callback();
+        }
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0,
+      },
+    );
 
     observer.observe(contentRef.current);
 
@@ -20,10 +31,4 @@ export const useObserver = (callback: () => void) => {
   }, [callback, contentRef]);
 
   return contentRef;
-};
-
-const options = {
-  root: null,
-  rootMargin: "0px",
-  threshold: 0,
 };
