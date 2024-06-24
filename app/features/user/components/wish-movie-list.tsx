@@ -19,7 +19,7 @@ export const WishMovieList = async () => {
   }
 
   return (
-    <Flex className="pt-8 flex-wrap">
+    <Flex wrap="wrap" className="pt-8">
       {wishMovies.map((wishMovie, idx) => (
         <div
           key={wishMovie.id}
