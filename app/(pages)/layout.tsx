@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/shared/styles";
 
-import {
-  QueryClientPovider as QueryProvider,
-  SessionProvider,
-  ThemeProvider,
-} from "../shared/provider";
+import { SessionProvider, ThemeProvider } from "../shared/provider";
 import { Footer, Toaster } from "../shared/components";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,16 +20,12 @@ export default function RootLayout({
   return (
     <html lang="kr">
       <body className={inter.className}>
-        <div className="relative box-border overflow-auto">
-          <QueryProvider>
-            <SessionProvider>
-              <ThemeProvider attribute="class" defaultTheme="system">
-                {children}
-                <Toaster richColors={true} theme="light" />
-              </ThemeProvider>
-            </SessionProvider>
-          </QueryProvider>
-        </div>
+        <SessionProvider>
+          <ThemeProvider attribute="class" defaultTheme="system">
+            <div className="relative box-border overflow-auto">{children}</div>
+            <Toaster richColors={true} theme="light" />
+          </ThemeProvider>
+        </SessionProvider>
         <Footer />
       </body>
     </html>
