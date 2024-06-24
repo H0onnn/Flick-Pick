@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 
-import { useState, useEffect } from "react";
-import { getMoviesByQuery } from "../apis";
+import { useState } from "react";
 import { useDebounce } from "@/app/shared/hooks";
+import { useSearchMovie } from "../hooks";
 
 import { cn } from "@/app/shared/utils";
 
@@ -22,36 +22,16 @@ import {
   CommandList,
 } from "@/app/shared/components";
 
-import { Check, Search, LoaderCircleIcon } from "lucide-react";
-import { Movie } from "../../movie/models";
+import { Check, Search, LoaderCircleIcon, Frown } from "lucide-react";
 
 export const SearchInput = () => {
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [isFetching, setIsFetching] = useState(false);
-
   const debouncedSearchValue = useDebounce(searchValue);
-
-  useEffect(() => {
-    if (!debouncedSearchValue) {
-      setMovies([]);
-      return;
-    }
-
-    const fetchMovies = async () => {
-      const { results } = await getMoviesByQuery({
-        query: debouncedSearchValue,
-      });
-
-      setMovies((prev) => [...prev, ...results]);
-      setIsFetching(false);
-    };
-
-    setIsFetching(true);
-    fetchMovies();
-  }, [debouncedSearchValue]);
+  const { isLoading, movies } = useSearchMovie({
+    searchQuery: debouncedSearchValue,
+  });
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -60,7 +40,7 @@ export const SearchInput = () => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-72 sm-max:hidden"
+          className="w-72 hidden lg:flex"
         >
           {searchValue ? (
             <p className="w-full truncate">{searchValue}</p>
@@ -80,13 +60,16 @@ export const SearchInput = () => {
           />
           <CommandList>
             <CommandEmpty>
-              {isFetching ? (
+              {isLoading ? (
                 <LoaderCircleIcon
                   size={24}
                   className="text-gray-500 animate-spin"
                 />
               ) : (
-                `검색 결과가 없어요 :(`
+                <Flex align="center" justify="center" className="gap-2">
+                  <Frown size={18} />
+                  검색된 작품이 없어요.
+                </Flex>
               )}
             </CommandEmpty>
             <CommandGroup>
@@ -113,7 +96,7 @@ export const SearchInput = () => {
                   </CommandItem>
                 </Link>
               ))}
-              {isFetching && (
+              {isLoading && (
                 <Flex align="center" justify="center">
                   <LoaderCircleIcon
                     size={24}
