@@ -11,7 +11,6 @@ export * from "./command";
 export * from "./popover";
 export * from "./textarea";
 export * from "./dropdown-menu";
-export * from "./theme-toggle";
 export * from "./separator";
 export * from "./hover-card";
 export * from "./tab-button";
