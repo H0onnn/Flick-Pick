@@ -6,3 +6,4 @@ export * from "./my-review-list";
 export * from "./my-wish-movie-card";
 export * from "./wish-movie-list";
 export * from "./withraw-dialog";
+export * from "./my-activities";
