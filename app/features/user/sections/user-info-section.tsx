@@ -7,12 +7,10 @@ import {
   Flex,
 } from "@/app/shared/components";
 
-import { SignoutButton, WithrawButton } from "../components";
-import { getMyActives } from "../apis";
+import { MyActivities, SignoutButton, WithrawButton } from "../components";
 
 export const UserInfoSection = async () => {
   const session = await getServerSession();
-  const actives = await getMyActives();
 
   const user = session?.user;
 
@@ -39,17 +37,7 @@ export const UserInfoSection = async () => {
           <p className="label2">{user?.name}</p>
         </Flex>
 
-        <Flex align="center" justify="center" className="space-x-16 py-8">
-          <Flex direction="column" align="center" className="space-y-2">
-            <p className="label2">{actives.reviewsCount}</p>
-            <p className="label3 text-gray-500">내 리뷰</p>
-          </Flex>
-
-          <Flex direction="column" align="center" className="space-y-2">
-            <p className="label2">{actives.likedMoviesCount}</p>
-            <p className="label3 text-gray-500">찜한 작품</p>
-          </Flex>
-        </Flex>
+        <MyActivities />
 
         <Flex align="center" justify="center" className="space-x-2 w-full">
           <SignoutButton />
