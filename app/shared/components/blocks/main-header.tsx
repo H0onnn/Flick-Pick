@@ -8,13 +8,14 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-  ModeToggle,
+  HeaderMenuButton,
 } from "@/app/shared/components";
 import { LoginModal } from "@/app/features/auth/components";
 import {
   HeaderSearchButton,
   SearchInput,
 } from "@/app/features/search/components";
+import { ModeToggle } from "../theme";
 
 export const MainHeader = async () => {
   const session = await getServerSession();
@@ -31,6 +32,7 @@ export const MainHeader = async () => {
       rightSlot={
         <Flex align="center" justify="center" className="sm-max:gap-0 gap-3">
           <ModeToggle />
+          <HeaderMenuButton />
           <HeaderSearchButton />
           <SearchInput />
           {status === "authenticated" ? (
