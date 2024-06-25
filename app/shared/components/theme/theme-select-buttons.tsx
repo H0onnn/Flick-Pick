@@ -1,17 +1,21 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
+import { cn } from "../../utils";
 import { useTheme } from "next-themes";
+import { Moon, Sun } from "lucide-react";
 import { Flex, Button } from "../ui";
 
 export const ThemeSelectButtons = () => {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
 
   return (
     <Flex align="center" className="space-x-2">
       <Button
         variant="outline"
-        className="space-x-2 flex-1"
+        className={cn(
+          "space-x-2 flex-1",
+          theme === "light" ? "bg-black text-white" : "bg-white text-black",
+        )}
         onClick={() => setTheme("light")}
       >
         <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90" />
