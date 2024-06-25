@@ -15,3 +15,4 @@ export * from "./theme-toggle";
 export * from "./separator";
 export * from "./hover-card";
 export * from "./tab-button";
+export * from "./sheet";
