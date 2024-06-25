@@ -13,7 +13,7 @@ export const PageLayout = ({
   className,
   isPaddingTop = true,
 }: PageLayoutProps) => {
-  const paddingBottom = header !== null ? "pb-[83px]" : "pb-0";
+  const paddingBottom = header !== null ? "pb-10" : "pb-0";
   const paddingTop = header !== null && isPaddingTop ? "pt-[62px]" : "pt-0";
 
   return (
