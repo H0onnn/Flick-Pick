@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎥 Flick Pick
 
-## Getting Started
+플릭픽과 함께, 당신의 최애 영화를 찾고 리뷰를 남겨보세요!
 
-First, run the development server:
+## 프로젝트 소개
+
+### 내용
+
+영화를 검색하고, 내 취향에 맞는 영화를 찾아볼 수 있는 커뮤니티입니다.
+
+<br/>
+
+## 프로젝트 링크
+
+[🔗Link](https://flick-pick-iota.vercel.app//)
+
+프로젝트는 `Vercel`을 통해 배포되었습니다.
+
+<br/>
+
+## 프로젝트 실행 가이드
+
+- 실행 방법 (3가지 중 택 1)
+  > 1. 배포 링크를 통한 접속
+  > 2. ZIP 파일 다운로드 및 압축 풀기 후 코드 에디터로 실행
+  > 3. 아래 커멘드를 이용한 실행
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ git clone https://github.com/H0onnn/Flick-Pick.git
+$ yarn install
+$ yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br/>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 기술 스택
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### Core
 
-## Learn More
+`TypeScript`, `Next14`
 
-To learn more about Next.js, take a look at the following resources:
+### DB
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`prisma orm`, `supabase`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Convention
 
-## Deploy on Vercel
+`eslint`, `prettier`, `yarn`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Network & Route
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`fetch`, `Next App Router`
+
+### Styling
+
+`TailwindCss`, `shadcn/ui`
+
+<br/>
+
+## 🚀 프로젝트 상세
+
+[추가 예정]
+
+## 아키텍쳐
+
+### 디렉토리 구조 (구조개편 및 설명 추가 예정)
+
+```bash
+📦 Flick-Pick
+├─ .eslintrc.json
+├─ .gitignore
+├─ .prettierrc
+├─ Dockerfile
+├─ README.md
+├─ app
+│  ├─ (pages)
+│  │  ├─ layout.tsx
+│  │  ├─ movie
+│  │  │  └─ [id]
+│  │  ├─ page.tsx
+│  │  ├─ search
+│  │  └─ user
+│  │     └─ info
+│  │        └─ [id]
+│  ├─ api
+│  │  └─ auth
+│  │     └─ [...nextauth]
+│  ├─ features
+│  │  ├─ auth
+│  │  │  ├─ components
+│  │  │  └─ models
+│  │  ├─ movie
+│  │  │  ├─ apis
+│  │  │  ├─ components
+│  │  │  ├─ models
+│  │  │  └─ sections
+│  │  ├─ review
+│  │  │  ├─ apis
+│  │  │  ├─ components
+│  │  │  ├─ constants
+│  │  │  ├─ models
+│  │  │  └─ sections
+│  │  ├─ search
+│  │  │  ├─ apis
+│  │  │  ├─ components
+│  │  │  └─ hooks
+│  │  └─ user
+│  │     ├─ apis
+│  │     ├─ components
+│  │     └─ sections
+│  ├─ prisma
+│  │  └─ schema.prisma
+│  ├─ public
+│  │  ├─ icons
+│  │  └─ images
+│  └─ shared
+│     ├─ actions
+│     ├─ apis
+│     │  └─ utils
+│     ├─ components
+│     │  ├─ async
+│     │  ├─ blocks
+│     │  ├─ fallback
+│     │  ├─ layout
+│     │  ├─ like
+│     │  ├─ rating
+│     │  └─ ui
+│     ├─ constants
+│     ├─ hooks
+│     ├─ lib
+│     ├─ provider
+│     ├─ styles
+│     ├─ types
+│     └─ utils
+├─ components.json
+├─ declarations.d.ts
+├─ middleware.ts
+├─ next.config.mjs
+├─ package.json
+├─ postcss.config.mjs
+├─ tailwind.config.ts
+├─ tsconfig.json
+└─ yarn.lock
+```
