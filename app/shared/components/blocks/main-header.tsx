@@ -9,6 +9,7 @@ import {
   AvatarFallback,
   AvatarImage,
   HeaderMenuButton,
+  MobileSearchButton,
 } from "@/app/shared/components";
 import { LoginModal } from "@/app/features/auth/components";
 import {
@@ -32,6 +33,7 @@ export const MainHeader = async () => {
       rightSlot={
         <Flex align="center" justify="center" className="sm-max:gap-0 gap-3">
           <ModeToggle />
+          <MobileSearchButton />
           <HeaderMenuButton />
           <HeaderSearchButton />
           <SearchInput />
