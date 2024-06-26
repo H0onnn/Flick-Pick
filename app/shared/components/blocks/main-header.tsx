@@ -45,7 +45,9 @@ export const MainHeader = async () => {
               </Avatar>
             </Link>
           ) : (
-            <LoginModal />
+            <div className="sm-max:hidden">
+              <LoginModal />
+            </div>
           )}
         </Flex>
       }
