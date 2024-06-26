@@ -22,7 +22,7 @@ import { toast } from "sonner";
 
 import { signIn } from "next-auth/react";
 
-export const LoginModal = () => {
+export const LoginModal = ({ isMobile }: { isMobile?: boolean }) => {
   const { isScrolled } = useScroll();
   const { theme } = useTheme();
 
@@ -47,6 +47,7 @@ export const LoginModal = () => {
             "head6sb",
             isScrolled === false && "text-white",
             theme === "dark" && isScrolled === true && "text-slate-700",
+            isMobile && theme === "light" && "text-primary",
           )}
         >
           로그인/가입
