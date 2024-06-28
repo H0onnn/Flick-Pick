@@ -14,7 +14,7 @@ interface LikeButtonProps {
   className?: string;
 }
 
-export const LikeButton = async ({
+export const LikeButton = ({
   id,
   movieId,
   type,

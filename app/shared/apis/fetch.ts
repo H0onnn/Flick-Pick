@@ -8,6 +8,13 @@ export const API_VARS = {
   YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY as string,
 } as const;
 
+export const fetchAPI = request.create({
+  baseURL: API_VARS.BASE_URL,
+  headers: {
+    Accept: "application/json",
+  },
+});
+
 export const fetchTMDB = request.create({
   baseURL: API_VARS.TMDB_API_URL,
   headers: {
