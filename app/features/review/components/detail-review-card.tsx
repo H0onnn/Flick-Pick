@@ -62,14 +62,14 @@ export const DetailReviewCard = ({
 
       <Separator />
 
-      <LikeButton
+      {/* <LikeButton
         id={id}
         movieId={movieId}
         type="review"
         isLiked={isLiked}
         size={14}
         className="mt-3"
-      />
+      /> */}
     </Card>
   );
 };
