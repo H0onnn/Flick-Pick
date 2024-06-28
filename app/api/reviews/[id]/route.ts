@@ -1,8 +1,8 @@
 import { getReviewsByMovie } from "@/app/features/review/apis";
-import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 
 export async function GET(
-  req: NextApiRequest, // eslint-disable-line
+  req: NextRequest, // eslint-disable-line
   { params }: { params: { id: string } },
 ): Promise<Response> {
   const movieId = params.id;
