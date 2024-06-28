@@ -7,7 +7,6 @@ import { toggleLikeReview } from "@/app/features/review/apis";
 
 interface LikeButtonProps {
   id: string;
-  movieId?: string;
   isLiked: boolean;
   type: "movie" | "review";
   size?: number;
@@ -16,7 +15,6 @@ interface LikeButtonProps {
 
 export const LikeButton = ({
   id,
-  movieId,
   type,
   isLiked,
   size = 34,
@@ -26,7 +24,10 @@ export const LikeButton = ({
     ? "text-red-500 fill-red-500"
     : "text-red-500 hover:fill-red-500";
 
-  const formAction = type === "movie" ? toggleLikeMovie : toggleLikeReview;
+  const toggleLikeReviewWithMovieId = toggleLikeReview.bind(null, id);
+
+  const formAction =
+    type === "movie" ? toggleLikeMovie : toggleLikeReviewWithMovieId;
 
   return (
     <form action={formAction}>
@@ -35,9 +36,6 @@ export const LikeButton = ({
         name={type === "movie" ? "movieId" : "reviewId"}
         value={id}
       />
-      {type === "review" && (
-        <input type="hidden" name="movieId" value={movieId} />
-      )}
       <button type="submit">
         <Heart size={size} className={cn([heartClass, className])} />
       </button>

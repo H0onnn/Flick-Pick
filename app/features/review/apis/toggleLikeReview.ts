@@ -4,14 +4,16 @@ import prisma from "@/app/shared/lib/prisma";
 import { getServerSession } from "@/app/shared/utils";
 import { revalidatePath } from "next/cache";
 
-export const toggleLikeReview = async (formData: FormData): Promise<void> => {
+export const toggleLikeReview = async (
+  movieId: string,
+  formData: FormData,
+): Promise<void> => {
   const session = await getServerSession();
 
   if (!session) return;
 
   const userId = session.user?.id as string;
   const reviewId = formData.get("reviewId") as string;
-  const movieId = formData.get("movieId") as string;
 
   const existingLike = await prisma.reviewLike.findFirst({
     where: {
