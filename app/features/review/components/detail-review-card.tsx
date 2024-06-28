@@ -43,8 +43,8 @@ export const DetailReviewCard = ({
 
           <p className="body3 text-gray-500">
             {updatedAt
-              ? `${updatedAt.toLocaleDateString()} (수정됨)`
-              : `${createdAt.toLocaleDateString()}`}
+              ? `${new Date(updatedAt).toLocaleDateString()} (수정됨)`
+              : `${new Date(createdAt).toLocaleDateString()}`}
           </p>
         </Flex>
 

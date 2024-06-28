@@ -1,7 +1,7 @@
 "use client";
 
-import { Suspense, useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import { useState, useEffect } from "react";
 
 import { DetailReviewList } from "./detail-review-list";
 
@@ -14,7 +14,9 @@ import {
   Flex,
 } from "@/app/shared/components/ui";
 import { ReviewCardSkeleton } from "./review-card-skeleton";
-import { GetAllReviews, getReviewsByMovie } from "../apis";
+
+import { fetchAPI } from "@/app/shared/apis";
+import { GetAllReviews } from "../apis";
 
 interface DetailReviewDialogProps {
   isOpen: boolean;
@@ -28,13 +30,16 @@ export const DetailReviewDialog = ({
   const params = useParams<{ id: string }>();
 
   const [reviews, setReviews] = useState<GetAllReviews[]>([]);
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       const fetchReviews = async () => {
-        const response = await getReviewsByMovie(params.id);
+        setIsFetching(true);
+        const response = await fetchAPI.get(`/api/reviews/${params.id}`);
 
-        setReviews(response);
+        setReviews(response.reviews);
+        setIsFetching(false);
       };
 
       fetchReviews();
@@ -52,17 +57,15 @@ export const DetailReviewDialog = ({
           코멘트가 있습니다.
         </DialogDescription>
 
-        <Suspense
-          fallback={
-            <Flex direction="column" className="gap-4">
-              {Array.from({ length: reviews.length }).map((_, index) => (
-                <ReviewCardSkeleton key={index} />
-              ))}
-            </Flex>
-          }
-        >
+        {isFetching ? (
+          <Flex direction="column" className="gap-4">
+            {Array.from({ length: reviews.length }).map((_, index) => (
+              <ReviewCardSkeleton key={index} />
+            ))}
+          </Flex>
+        ) : (
           <DetailReviewList reviews={reviews} />
-        </Suspense>
+        )}
       </DialogContent>
     </Dialog>
   );
