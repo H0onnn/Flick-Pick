@@ -13,6 +13,7 @@ export const fetchAPI = request.create({
   headers: {
     Accept: "application/json",
   },
+  credentials: "include",
 });
 
 export const fetchTMDB = request.create({
