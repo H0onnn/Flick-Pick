@@ -5,6 +5,7 @@ export interface Youtube {
   regionCode: string;
   pageInfo: PageInfo;
   items: Item[];
+  error?: unknown;
 }
 
 export interface PageInfo {

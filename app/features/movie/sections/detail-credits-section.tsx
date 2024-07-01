@@ -1,20 +1,13 @@
-"use client";
-
-import { useMemo } from "react";
 import { Flex } from "@/app/shared/components";
 import { CreditsCard } from "../components";
-import { MovieDetail } from "@/app/features/movie/models";
+import { getMovieDetail } from "../apis";
 
-export const DetailCreditsSection = ({
-  movieDetail,
-}: {
-  movieDetail: MovieDetail;
-}) => {
-  const director = useMemo(() => {
-    if (!movieDetail) return null;
+export const DetailCreditsSection = async ({ id }: { id: string }) => {
+  const movieDetail = await getMovieDetail(id);
 
-    return movieDetail.credits.crew.find((crew) => crew.job === "Director");
-  }, [movieDetail]);
+  const director = movieDetail.credits.crew.find(
+    (crew) => crew.job === "Director",
+  );
 
   return (
     <section className="pt-12">
