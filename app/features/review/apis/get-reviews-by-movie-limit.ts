@@ -4,7 +4,7 @@ import prisma from "@/app/shared/lib/prisma";
 import { getServerSession } from "@/app/shared/utils";
 
 import { Review } from "../models";
-import { User } from "../../auth/login/models";
+import { User } from "../../auth/models";
 
 export interface GetReviewProps extends Review {
   user: User;

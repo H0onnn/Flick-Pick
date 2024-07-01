@@ -10,7 +10,7 @@ import {
   Flex,
 } from "@/app/shared/components";
 
-import { User } from "../../auth/login/models";
+import { User } from "../../auth/models";
 
 interface MyReviewCardProps {
   user: User;

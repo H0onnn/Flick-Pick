@@ -7,7 +7,8 @@ import {
   Flex,
 } from "@/app/shared/components";
 
-import { MyActivities, SignoutButton, WithrawButton } from "../components";
+import { MyActivities } from "../components";
+import { SignoutButton, WithrawButton } from "@/app/features/auth/components";
 
 export const UserInfoSection = async () => {
   const session = await getServerSession();

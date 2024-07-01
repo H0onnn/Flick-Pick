@@ -9,7 +9,7 @@ import {
   AvatarImage,
 } from "@/app/shared/components";
 import { Header, MobileSearchButton, HeaderMenuButton } from "./header";
-import { LoginModal } from "@/app/features/auth/login/components";
+import { LoginModal } from "@/app/features/auth/components";
 import {
   HeaderSearchButton,
   SearchInput,
