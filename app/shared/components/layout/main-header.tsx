@@ -4,13 +4,11 @@ import Link from "next/link";
 import IMAGES from "@/app/public/images";
 import {
   Flex,
-  Header,
   Avatar,
   AvatarFallback,
   AvatarImage,
-  HeaderMenuButton,
-  MobileSearchButton,
 } from "@/app/shared/components";
+import { Header, MobileSearchButton, HeaderMenuButton } from "./header";
 import { LoginModal } from "@/app/features/auth/login/components";
 import {
   HeaderSearchButton,
