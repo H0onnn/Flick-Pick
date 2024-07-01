@@ -7,7 +7,15 @@ import {
   DetailRelatedSection,
 } from "@/app/features/movie/sections";
 import { DetailReviewSection } from "@/app/features/review/sections";
-import { getMovieDetail, saveMovie } from "@/app/features/movie/apis";
+import {
+  getMovieDetail,
+  getMovieTrailer,
+  saveMovie,
+} from "@/app/features/movie/apis";
+import {
+  getMyReviewByMovie,
+  getReviewsByMovieLimit,
+} from "@/app/features/review/apis";
 
 export default async function Page({
   params,
@@ -16,25 +24,28 @@ export default async function Page({
     id: string;
   };
 }) {
+  getMovieDetail(params.id);
+  getReviewsByMovieLimit(params.id);
+
   const movieDetail = await getMovieDetail(params.id);
+  getMyReviewByMovie(String(movieDetail.id));
+  getMovieTrailer(movieDetail.title);
+
   await saveMovie(movieDetail);
 
   return (
     <>
-      <DetailHeaderSection movieDetail={movieDetail} />
+      <DetailHeaderSection id={params.id} />
       <PageLayout header={<MainHeader />} isPaddingTop={false}>
-        <DetailBodySection movieDetail={movieDetail} />
+        <DetailBodySection id={params.id} />
 
-        <DetailCreditsSection movieDetail={movieDetail} />
+        <DetailCreditsSection id={params.id} />
 
-        <DetailTrailerSection movieId={params.id} />
+        <DetailTrailerSection id={params.id} />
 
-        <DetailReviewSection movieId={params.id} />
+        <DetailReviewSection id={params.id} />
 
-        <DetailRelatedSection
-          title={movieDetail.title}
-          genreIds={movieDetail.genres.map((genre) => genre.id)}
-        />
+        <DetailRelatedSection id={params.id} />
       </PageLayout>
     </>
   );

@@ -37,7 +37,7 @@ export const MainBannerCarousel = ({ movieList }: { movieList: MovieList }) => {
                 <Image
                   src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
                   fill={true}
-                  className="full_img_cover"
+                  className="object-cover"
                   alt="배너 이미지"
                 />
               </div>

@@ -5,7 +5,7 @@ import prisma from "@/app/shared/lib/prisma";
 import { Review } from "../models";
 import { User } from "../../auth/models";
 
-export interface GetAllReviews extends Review {
+export interface GetAllReviewsProps extends Review {
   user: User;
   isLiked: boolean;
 }
@@ -25,7 +25,7 @@ const isLikedReview = cache(
 
 // 영화 리뷰 조회 (전체 리스트)
 export const getReviewsByMovie = cache(
-  async (movieId: string): Promise<GetAllReviews[]> => {
+  async (movieId: string): Promise<GetAllReviewsProps[]> => {
     const reviews = await prisma.review.findMany({
       where: {
         movieId,

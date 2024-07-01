@@ -1,20 +1,18 @@
-import { getMoviesByGenre } from "../apis";
+import { getMovieDetail, getMoviesByGenre } from "../apis";
 import { MainCarousel } from "../components";
 
-interface DetailRelatedSectionProps {
-  title: string;
-  genreIds: number[];
-}
+export const DetailRelatedSection = async ({ id }: { id: string }) => {
+  const movieDetail = await getMovieDetail(id);
 
-export const DetailRelatedSection = async ({
-  title,
-  genreIds,
-}: DetailRelatedSectionProps) => {
+  const genreIds = movieDetail.genres.map((genre) => genre.id);
+
+  getMoviesByGenre(genreIds);
+
   const movieList = await getMoviesByGenre(genreIds);
 
   // title이 같은 영화 제거
   const filteredMovieList = (movieList.results = movieList.results.filter(
-    (movie) => movie.title !== title,
+    (movie) => movie.title !== movieDetail.title,
   ));
 
   if (filteredMovieList.length === 0) return null;

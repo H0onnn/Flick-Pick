@@ -1,2 +1,2 @@
-export * from "./theme-toggle";
-export * from "./theme-select-buttons";
+export { ModeToggle } from "./theme-toggle";
+export { ThemeSelectButtons } from "./theme-select-buttons";

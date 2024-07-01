@@ -16,7 +16,7 @@ import {
 import { ReviewCardSkeleton } from "./review-card-skeleton";
 
 import { fetchAPI } from "@/app/shared/apis";
-import { GetAllReviews } from "../apis";
+import { GetAllReviewsProps } from "../apis/get-all-reviews-by-movie";
 
 interface DetailReviewDialogProps {
   isOpen: boolean;
@@ -29,7 +29,7 @@ export const DetailReviewDialog = ({
 }: DetailReviewDialogProps) => {
   const params = useParams<{ id: string }>();
 
-  const [reviews, setReviews] = useState<GetAllReviews[]>([]);
+  const [reviews, setReviews] = useState<GetAllReviewsProps[]>([]);
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {

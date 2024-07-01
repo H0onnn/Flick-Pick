@@ -1,2 +1,2 @@
-export * from "./main-review-section";
-export * from "./detail-review-section";
+export { MainReviewSection } from "./main-review-section";
+export { DetailReviewSection } from "./detail-review-section";

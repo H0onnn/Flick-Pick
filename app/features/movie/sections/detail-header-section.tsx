@@ -1,13 +1,11 @@
 import { Flex } from "@/app/shared/components";
 import Image from "next/image";
 import { formatHour } from "@/app/shared/utils";
-import { MovieDetail } from "@/app/features/movie/models";
+import { getMovieDetail } from "../apis";
 
-export const DetailHeaderSection = ({
-  movieDetail,
-}: {
-  movieDetail: MovieDetail;
-}) => {
+export const DetailHeaderSection = async ({ id }: { id: string }) => {
+  const movieDetail = await getMovieDetail(id);
+
   return (
     <section>
       <div className="relative h-80 sm:h-96 md:h-[450px] lg:h-[550px] bg-cover bg-center">

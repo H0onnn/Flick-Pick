@@ -1,2 +1,2 @@
-export * from "./search-input";
-export * from "./header-search-button";
+export { SearchInput } from "./search-input";
+export { HeaderSearchButton } from "./header-search-button";

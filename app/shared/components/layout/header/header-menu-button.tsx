@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getServerSession } from "../../utils";
+import { getServerSession } from "../../../utils";
 
 import { Menu, Inbox } from "lucide-react";
 
@@ -16,8 +16,9 @@ import {
   Flex,
   Button,
 } from "@/app/shared/components";
-import { MyActivities, SignoutButton } from "@/app/features/user/components";
-import { ThemeSelectButtons } from "../theme";
+import { MyActivities } from "@/app/features/user/components";
+import { SignoutButton } from "@/app/features/auth/components";
+import { ThemeSelectButtons } from "../../theme";
 import { LoginModal } from "@/app/features/auth/components";
 
 export const HeaderMenuButton = async () => {

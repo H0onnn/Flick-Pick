@@ -1,4 +1,3 @@
-export * from "./header";
-export * from "./page-layout";
-export * from "./header-menu-button";
-export * from "./mobile-search-button";
+export { PageLayout } from "./page-layout";
+export { MainHeader } from "./main-header";
+export { Footer } from "./footer";

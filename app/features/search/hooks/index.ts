@@ -1,1 +1,1 @@
-export * from "./use-search-movie";
+export { useSearchMovie } from "./use-search-movie";

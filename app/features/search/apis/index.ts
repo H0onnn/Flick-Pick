@@ -1,1 +1,1 @@
-export * from "./get-movies-by-query";
+export { getMoviesByQuery } from "./get-movies-by-query";

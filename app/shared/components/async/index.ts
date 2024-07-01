@@ -1,2 +1,2 @@
-export * from "./error-boundary";
-export * from "./async-boundary";
+export { AsyncBoundary } from "./async-boundary";
+export { ErrorBoundary } from "./error-boundary";

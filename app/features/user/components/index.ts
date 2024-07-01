@@ -1,9 +1,6 @@
-export * from "./withraw-button";
-export * from "./signout-button";
-export * from "./category-tabs";
-export * from "./my-review-card";
-export * from "./my-review-list";
-export * from "./my-wish-movie-card";
-export * from "./wish-movie-list";
-export * from "./withraw-dialog";
-export * from "./my-activities";
+export { CategoryTabs } from "./category-tabs";
+export { MyReviewCard } from "./my-review-card";
+export { MyReviews } from "./my-review-list";
+export { MyWishMovieCard } from "./my-wish-movie-card";
+export { WishMovieList } from "./wish-movie-list";
+export { MyActivities } from "./my-activities";
