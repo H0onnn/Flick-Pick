@@ -1,11 +1,7 @@
 import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  Flex,
-  StarRating,
-  LikeButton,
-} from "@/app/shared/components";
+import { Card, CardContent, Flex } from "@/app/shared/components";
+import { StarRating } from "@/app/features/review/components";
+import { LikeButton } from "@/app/features/like/components";
 import { ReviewForm } from "@/app/features/review/components";
 import { MovieDetail } from "@/app/features/movie/models";
 import { Review } from "@/app/features/review/models";

@@ -1,1 +1,1 @@
-export * from "./non-data-fallback";
+export { NonDataFallback } from "./non-data-fallback";

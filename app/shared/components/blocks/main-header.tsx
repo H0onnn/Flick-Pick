@@ -11,7 +11,7 @@ import {
   HeaderMenuButton,
   MobileSearchButton,
 } from "@/app/shared/components";
-import { LoginModal } from "@/app/features/auth/components";
+import { LoginModal } from "@/app/features/auth/login/components";
 import {
   HeaderSearchButton,
   SearchInput,

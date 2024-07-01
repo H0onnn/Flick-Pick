@@ -1,9 +1,9 @@
-export * from "./top-rated-section";
-export * from "./now-playing-section";
-export * from "./upcoming-section";
-export * from "./main-banner-section";
-export * from "./detail-header-section";
-export * from "./detail-body-section";
-export * from "./detail-credits-section";
-export * from "./detail-related-section";
-export * from "./detail-trailer-section";
+export { TopRatedSection } from "./top-rated-section";
+export { NowPlayingSection } from "./now-playing-section";
+export { UpComingSection } from "./upcoming-section";
+export { MainBannerSection } from "./main-banner-section";
+export { DetailHeaderSection } from "./detail-header-section";
+export { DetailBodySection } from "./detail-body-section";
+export { DetailCreditsSection } from "./detail-credits-section";
+export { DetailRelatedSection } from "./detail-related-section";
+export { DetailTrailerSection } from "./detail-trailer-section";

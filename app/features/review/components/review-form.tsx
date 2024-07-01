@@ -5,8 +5,11 @@ import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import { toast } from "sonner";
-import { Textarea, Button, Flex, StarRating } from "@/app/shared/components";
-import { ReviewActionButtons } from "./review-action-buttons";
+import { Textarea, Button, Flex } from "@/app/shared/components";
+import {
+  StarRating,
+  ReviewActionButtons,
+} from "@/app/features/review/components";
 import { Loader2 } from "lucide-react";
 
 import { PostReviewDto, Review } from "@/app/features/review/models";

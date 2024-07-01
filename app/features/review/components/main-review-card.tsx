@@ -2,12 +2,12 @@ import Image from "next/image";
 import {
   Card,
   Flex,
-  StarRating,
   Avatar,
   AvatarImage,
   AvatarFallback,
   Separator,
 } from "@/app/shared/components";
+import { StarRating } from "@/app/features/review/components";
 import { Heart } from "lucide-react";
 interface MainReviewCardProps {
   movieTitle: string;

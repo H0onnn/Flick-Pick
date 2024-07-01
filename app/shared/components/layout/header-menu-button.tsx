@@ -18,7 +18,7 @@ import {
 } from "@/app/shared/components";
 import { MyActivities, SignoutButton } from "@/app/features/user/components";
 import { ThemeSelectButtons } from "../theme";
-import { LoginModal } from "@/app/features/auth/components";
+import { LoginModal } from "@/app/features/auth/login/components";
 
 export const HeaderMenuButton = async () => {
   const session = await getServerSession();

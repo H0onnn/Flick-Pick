@@ -3,7 +3,7 @@ import { cache } from "react";
 import prisma from "@/app/shared/lib/prisma";
 
 import { Review } from "../models";
-import { User } from "../../auth/models";
+import { User } from "../../auth/login/models";
 
 export interface GetAllReviews extends Review {
   user: User;

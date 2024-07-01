@@ -1,5 +1,5 @@
 import prisma from "@/app/shared/lib/prisma";
-import { User } from "@/app/features/auth/models";
+import { User } from "@/app/features/auth/login/models";
 import { Review } from "../models";
 
 interface GetRecentReviewProps extends Review {

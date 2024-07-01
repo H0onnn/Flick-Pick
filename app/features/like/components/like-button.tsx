@@ -2,8 +2,7 @@
 
 import { cn } from "@/app/shared/utils";
 import { Heart } from "lucide-react";
-import { toggleLikeMovie } from "@/app/features/movie/apis";
-import { toggleLikeReview } from "@/app/features/review/apis";
+import { toggleLikeMovie, toggleLikeReview } from "../apis";
 
 interface LikeButtonProps {
   id: string;

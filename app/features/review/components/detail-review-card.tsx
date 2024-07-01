@@ -4,10 +4,10 @@ import {
   Avatar,
   AvatarImage,
   AvatarFallback,
-  StarRating,
   Separator,
-  LikeButton,
 } from "@/app/shared/components";
+import { StarRating } from "@/app/features/review/components";
+import { LikeButton } from "@/app/features/like/components";
 
 interface DetailReviewCardProps {
   id: string;
