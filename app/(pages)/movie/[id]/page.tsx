@@ -7,7 +7,7 @@ import {
   DetailRelatedSection,
 } from "@/app/features/movie/sections";
 import { DetailReviewSection } from "@/app/features/review/sections";
-import { getMovieDetail, saveMovie } from "@/app/features/movie/apis/post";
+import { getMovieDetail, saveMovie } from "@/app/features/movie/apis";
 
 export default async function Page({
   params,
