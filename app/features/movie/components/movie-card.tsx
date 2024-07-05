@@ -32,7 +32,7 @@ export const MovieCard = ({
           <Image
             src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W342}${poster_path}`}
             alt="영화 포스터"
-            className="rounded-sm"
+            className="rounded-sm object-cover"
             fill={true}
             placeholder="blur"
             blurDataURL={IMAGE_BASE_URL.BLUR}

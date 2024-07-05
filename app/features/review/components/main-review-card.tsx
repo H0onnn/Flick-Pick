@@ -48,7 +48,7 @@ export const MainReviewCard = ({
         <Image
           src={moviePoster}
           alt="포스터"
-          className="object-contain"
+          className="object-cover"
           width={80}
           height={100}
           placeholder="blur"

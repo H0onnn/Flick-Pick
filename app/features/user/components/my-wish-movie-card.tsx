@@ -25,7 +25,7 @@ export const MyWishMovieCard = ({
             src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W185}${poster}`}
             alt="포스터"
             fill={true}
-            className="object-contain"
+            className="object-cover"
             placeholder="blur"
             blurDataURL={IMAGE_BASE_URL.BLUR}
           />
