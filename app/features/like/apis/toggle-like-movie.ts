@@ -7,7 +7,7 @@ import { revalidateTag } from "next/cache";
 export const toggleLikeMovie = async (formData: FormData): Promise<void> => {
   const session = await getServerSession();
 
-  if (!session) throw new Error("로그인이 필요한 서비스입니다.");
+  if (!session) return;
 
   const userId = session.user?.id as string;
   const movieId = formData.get("movieId") as string;
