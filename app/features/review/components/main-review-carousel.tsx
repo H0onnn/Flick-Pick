@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import { IMAGE_BASE_URL, IMAGE_SIZE } from "@/app/shared/constants";
 import {
   Carousel,
   CarouselContent,
@@ -29,7 +29,7 @@ export const MainReviewCarousel = async () => {
             <Link href={`/movie/${review.movieId}`}>
               <MainReviewCard
                 movieTitle={review.movie.title}
-                moviePoster={`https://image.tmdb.org/t/p/w500/${review.movie.poster}`}
+                moviePoster={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W154}${review.movie.poster}`}
                 review={review.comment}
                 userName={review.user.name!}
                 userProfile={review.user.image!}

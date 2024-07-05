@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-
 import ICONS from "@/app/public/icons";
+import { IMAGE_BASE_URL, IMAGE_SIZE } from "@/app/shared/constants";
 
 import {
   Avatar,
@@ -45,7 +45,13 @@ export const MyReviewCard = ({
               <p className="head6sb line-clamp-1">{movieTitle}</p>
               <p className="body2 my-3 line-clamp-3">{review}</p>
               <Flex align="center" className="space-x-1">
-                <Image src={ICONS.FULL_STAR} className="w-6 h-6" alt="별점" />
+                <Image
+                  src={ICONS.FULL_STAR}
+                  className="w-6 h-6"
+                  alt="별점"
+                  placeholder="blur"
+                  blurDataURL={IMAGE_BASE_URL.BLUR}
+                />
                 <p className="label3 text-yellow-500 mt-0.5">{rating}</p>
               </Flex>
 
@@ -56,11 +62,13 @@ export const MyReviewCard = ({
           </Flex>
 
           <Image
-            src={`https://image.tmdb.org/t/p/w200/${moviePoster}`}
+            src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W185}${moviePoster}`}
             alt="포스터"
             width={100}
             height={130}
             className="object-contain ml-3"
+            placeholder="blur"
+            blurDataURL={IMAGE_BASE_URL.BLUR}
           />
         </Flex>
       </Link>

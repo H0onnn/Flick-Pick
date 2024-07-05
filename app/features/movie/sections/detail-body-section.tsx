@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { IMAGE_BASE_URL, IMAGE_SIZE } from "@/app/shared/constants";
 import { Card, CardContent, Flex } from "@/app/shared/components";
 import { StarRating } from "@/app/features/review/components";
 import { LikeButton } from "@/app/features/like/components";
@@ -17,10 +18,12 @@ export const DetailBodySection = async ({ id }: { id: string }) => {
         <Card className="relative w-[250px] h-[350px] border-border border-solid border-2 left-[50%] transform -translate-x-[50%] sm:left-0 sm:transform-none">
           <CardContent className="aspect-square w-full h-full">
             <Image
-              src={`https://image.tmdb.org/t/p/w500/${movieDetail.poster_path}`}
+              src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W342}${movieDetail.poster_path}`}
               className="object-cover w-full h-full rounded-md"
               fill={true}
               alt="포스터"
+              placeholder="blur"
+              blurDataURL={IMAGE_BASE_URL.BLUR}
             />
           </CardContent>
 

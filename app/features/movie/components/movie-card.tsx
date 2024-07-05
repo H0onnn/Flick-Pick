@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { IMAGE_BASE_URL, IMAGE_SIZE } from "@/app/shared/constants";
 import { Movie } from "@/app/features/movie/models";
 import { Flex, Badge, Card, CardContent } from "@/app/shared/components";
 
@@ -29,10 +30,12 @@ export const MovieCard = ({
         )}
         <CardContent className="flex aspect-square items-center justify-center">
           <Image
-            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+            src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W342}${poster_path}`}
             alt="영화 포스터"
             className="rounded-sm"
             fill={true}
+            placeholder="blur"
+            blurDataURL={IMAGE_BASE_URL.BLUR}
           />
         </CardContent>
       </Card>

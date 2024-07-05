@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { IMAGE_BASE_URL, IMAGE_SIZE } from "@/app/shared/constants";
 
 import { Flex } from "@/app/shared/components";
 
@@ -21,10 +22,12 @@ export const MyWishMovieCard = ({
       <Flex align="center" direction="column" className="space-y-1">
         <div className="relative w-[130px] h-[190px]">
           <Image
-            src={`https://image.tmdb.org/t/p/w200/${poster}`}
+            src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W185}${poster}`}
             alt="포스터"
             fill={true}
             className="object-contain"
+            placeholder="blur"
+            blurDataURL={IMAGE_BASE_URL.BLUR}
           />
         </div>
 

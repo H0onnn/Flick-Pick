@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { IMAGE_BASE_URL, IMAGE_SIZE } from "@/app/shared/constants";
 import { Flex, Card, CardContent } from "@/app/shared/components";
 import { UserRound } from "lucide-react";
 
@@ -20,10 +21,12 @@ export const CreditsCard = ({
           <CardContent className={profilePath ? "" : "bg-gray-100"}>
             {profilePath ? (
               <Image
-                src={`https://image.tmdb.org/t/p/w500/${profilePath}`}
-                className="object-cover w-full h-full rounded-md"
+                src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.PROFILE.W185}/${profilePath}`}
+                className="object-cover rounded-md"
                 fill={true}
                 alt="감독/출연진"
+                placeholder="blur"
+                blurDataURL={IMAGE_BASE_URL.BLUR}
               />
             ) : (
               <UserRound
