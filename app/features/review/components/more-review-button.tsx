@@ -2,10 +2,16 @@
 
 import { useState } from "react";
 
-import { Button } from "@/app/shared/components/ui";
+import { Flex, Button, AsyncBoundary } from "@/app/shared/components";
 import { DetailReviewDialog } from "./detail-review-dialog";
+import { GetAllReviewsProps } from "../apis/get-all-reviews-by-movie";
+import { ReviewCardSkeleton } from "./skeleton/review-card-skeleton";
 
-export const MoreReviewButton = () => {
+interface MoreReviewButtonProps {
+  reviews: Promise<GetAllReviewsProps[]>;
+}
+
+export const MoreReviewButton = ({ reviews }: MoreReviewButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -19,7 +25,21 @@ export const MoreReviewButton = () => {
         더보기
       </Button>
 
-      <DetailReviewDialog isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <AsyncBoundary
+        loadingFallback={
+          <Flex direction="column" className="gap-4">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <ReviewCardSkeleton key={index} />
+            ))}
+          </Flex>
+        }
+      >
+        <DetailReviewDialog
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          reviews={reviews}
+        />
+      </AsyncBoundary>
     </>
   );
 };
