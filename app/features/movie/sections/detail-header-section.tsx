@@ -1,5 +1,6 @@
-import { Flex } from "@/app/shared/components";
 import Image from "next/image";
+import { IMAGE_BASE_URL, IMAGE_SIZE } from "@/app/shared/constants";
+import { Flex } from "@/app/shared/components";
 import { formatHour } from "@/app/shared/utils";
 import { getMovieDetail } from "../apis";
 
@@ -10,10 +11,12 @@ export const DetailHeaderSection = async ({ id }: { id: string }) => {
     <section>
       <div className="relative h-80 sm:h-96 md:h-[450px] lg:h-[550px] bg-cover bg-center">
         <Image
-          src={`https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`}
+          src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.BACKDROP.W1280}${movieDetail.backdrop_path}`}
           fill={true}
-          className="full_img_cover"
+          className="object-cover"
           alt="배경 이미지"
+          placeholder="blur"
+          blurDataURL={IMAGE_BASE_URL.BLUR}
         />
 
         <Flex

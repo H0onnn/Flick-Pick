@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { IMAGE_BASE_URL } from "@/app/shared/constants";
 import {
   Card,
   Flex,
@@ -47,9 +48,11 @@ export const MainReviewCard = ({
         <Image
           src={moviePoster}
           alt="포스터"
-          className="object-contain"
+          className="object-cover"
           width={80}
           height={100}
+          placeholder="blur"
+          blurDataURL={IMAGE_BASE_URL.BLUR}
         />
 
         <Flex direction="column" className="gap-2 p-2 w-full">
