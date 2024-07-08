@@ -24,7 +24,10 @@ export const DetailReviewDialog = ({
   onClose,
   reviews,
 }: DetailReviewDialogProps) => {
-  const allReviews = use(reviews);
+  let allReviews: GetAllReviewsProps[] = [];
+  if (isOpen) {
+    allReviews = use(reviews);
+  }
 
   return (
     <Dialog onOpenChange={onClose} open={isOpen} defaultOpen={isOpen}>
