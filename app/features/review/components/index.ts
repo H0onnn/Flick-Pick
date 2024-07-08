@@ -7,5 +7,4 @@ export { DetailReviewCard } from "./detail-review-card";
 export { DetailReviewList } from "./detail-review-list";
 export { DetailReviewDialog } from "./detail-review-dialog";
 export { MoreReviewButton } from "./more-review-button";
-export { ReviewCardSkeleton } from "./review-card-skeleton";
 export { StarRating } from "./star-rating";
