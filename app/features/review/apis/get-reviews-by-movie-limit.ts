@@ -33,7 +33,7 @@ export const getReviewsByMovieLimit = async (
   const userId = session?.user?.id ?? "";
 
   const reviews = await prisma.review.findMany({
-    take: 3,
+    take: 4,
     where: {
       movieId,
     },
