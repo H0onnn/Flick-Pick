@@ -12,7 +12,7 @@ export const DetailReviewSection = async ({ id }: { id: string }) => {
       <Flex align="center" justify="between">
         <p className="head2 mb-2">사용자 코멘트</p>
 
-        <MoreReviewButton reviews={allReviews} />
+        {reviewsByLimit.length > 3 && <MoreReviewButton reviews={allReviews} />}
       </Flex>
 
       <DetailReviewList reviews={reviews} />
