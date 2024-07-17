@@ -6,7 +6,7 @@ import { Heart } from "lucide-react";
 
 interface LikeButtonProps {
   id: string;
-  action: (formData: FormData) => Promise<void>; // eslint-disable-line
+  action: (formData: FormData) => void; // eslint-disable-line
   isLiked: boolean;
   size?: number;
   className?: string;
