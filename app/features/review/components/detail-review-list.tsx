@@ -27,7 +27,6 @@ export const DetailReviewList = ({ reviews }: DetailReviewListProps) => {
         <DetailReviewCard
           key={review.id}
           id={review.id}
-          movieId={review.movieId}
           review={review.comment}
           userName={review.user.name!}
           userProfile={review.user.image!}

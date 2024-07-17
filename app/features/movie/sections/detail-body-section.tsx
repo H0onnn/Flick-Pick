@@ -7,6 +7,7 @@ import { ReviewForm } from "@/app/features/review/components";
 import { Review } from "@/app/features/review/models";
 import { getMovieDetail } from "../apis";
 import { getMyReviewByMovie } from "@/app/features/review/apis";
+import { toggleLikeMovie } from "../../like/apis";
 
 export const DetailBodySection = async ({ id }: { id: string }) => {
   const movieDetail = await getMovieDetail(id);
@@ -28,7 +29,7 @@ export const DetailBodySection = async ({ id }: { id: string }) => {
           </CardContent>
 
           <LikeButton
-            type="movie"
+            action={toggleLikeMovie}
             id={String(movieDetail.id)}
             isLiked={movieDetail.isLiked}
             className="absolute top-3 left-3"

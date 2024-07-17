@@ -1,40 +1,45 @@
-// TODO: refactoring components to use shared components
+"use client";
 
+import { useOptimistic } from "react";
 import { cn } from "@/app/shared/utils";
 import { Heart } from "lucide-react";
-import { toggleLikeMovie, toggleLikeReview } from "../apis";
 
 interface LikeButtonProps {
   id: string;
+  action: (formData: FormData) => void; // eslint-disable-line
   isLiked: boolean;
-  type: "movie" | "review";
   size?: number;
   className?: string;
 }
 
 export const LikeButton = ({
   id,
-  type,
+  action,
   isLiked,
   size = 34,
   className,
 }: LikeButtonProps) => {
-  const heartClass = isLiked
+  const [optimisticLiked, toggleOptimistic] = useOptimistic(
+    isLiked,
+    (state) => {
+      return !state;
+    },
+  );
+
+  const heartClass = optimisticLiked
     ? "text-red-500 fill-red-500"
     : "text-red-500 hover:fill-red-500";
 
-  const toggleLikeReviewWithMovieId = toggleLikeReview.bind(null, id);
-
-  const formAction =
-    type === "movie" ? toggleLikeMovie : toggleLikeReviewWithMovieId;
-
   return (
-    <form action={formAction}>
-      <input
-        type="hidden"
-        name={type === "movie" ? "movieId" : "reviewId"}
-        value={id}
-      />
+    <form
+      action={async (formData) => {
+        const id = formData.get("id") as string;
+
+        toggleOptimistic(id);
+        await action(formData);
+      }}
+    >
+      <input type="hidden" name="id" value={id} />
       <button type="submit">
         <Heart size={size} className={cn([heartClass, className])} />
       </button>

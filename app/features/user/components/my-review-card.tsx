@@ -61,16 +61,16 @@ export const MyReviewCard = ({
             </Flex>
           </Flex>
 
-        <div className="relative min-w-[100px] min-h-[130px] w-[100px] h-[130px]">
-          <Image
-            src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W185}${moviePoster}`}
-            alt="포스터"
-            fill={true}
-            className="ml-3"
-            placeholder="blur"
-            blurDataURL={IMAGE_BASE_URL.BLUR}
-          />
-        </div>
+          <div className="relative min-w-[100px] min-h-[130px] w-[100px] h-[130px]">
+            <Image
+              src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W185}${moviePoster}`}
+              alt="포스터"
+              fill={true}
+              className="ml-3"
+              placeholder="blur"
+              blurDataURL={IMAGE_BASE_URL.BLUR}
+            />
+          </div>
         </Flex>
       </Link>
     </Flex>
