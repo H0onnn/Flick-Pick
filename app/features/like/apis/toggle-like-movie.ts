@@ -10,7 +10,7 @@ export const toggleLikeMovie = async (formData: FormData): Promise<void> => {
   if (!session) return;
 
   const userId = session.user?.id as string;
-  const movieId = formData.get("movieId") as string;
+  const movieId = formData.get("id") as string;
 
   const existingLike = await prisma.like.findFirst({
     where: {

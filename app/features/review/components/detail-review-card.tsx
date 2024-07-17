@@ -8,10 +8,10 @@ import {
 } from "@/app/shared/components";
 import { StarRating } from "@/app/features/review/components";
 import { LikeButton } from "@/app/features/like/components";
+import { toggleLikeReview } from "../../like/apis";
 
 interface DetailReviewCardProps {
   id: string;
-  movieId: string;
   userName: string;
   userProfile: string;
   rating: number;
@@ -23,7 +23,6 @@ interface DetailReviewCardProps {
 
 export const DetailReviewCard = ({
   id,
-  movieId,
   userName,
   userProfile,
   rating,
@@ -64,7 +63,7 @@ export const DetailReviewCard = ({
 
       <LikeButton
         id={id}
-        type="review"
+        action={toggleLikeReview}
         isLiked={isLiked}
         size={14}
         className="mt-3"
