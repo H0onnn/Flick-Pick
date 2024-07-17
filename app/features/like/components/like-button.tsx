@@ -1,3 +1,6 @@
+"use client";
+
+import { useOptimistic } from "react";
 import { cn } from "@/app/shared/utils";
 import { Heart } from "lucide-react";
 
@@ -16,12 +19,26 @@ export const LikeButton = ({
   size = 34,
   className,
 }: LikeButtonProps) => {
-  const heartClass = isLiked
+  const [optimisticLiked, toggleOptimistic] = useOptimistic(
+    isLiked,
+    (state) => {
+      return !state;
+    },
+  );
+
+  const heartClass = optimisticLiked
     ? "text-red-500 fill-red-500"
     : "text-red-500 hover:fill-red-500";
 
   return (
-    <form action={action}>
+    <form
+      action={async (formData) => {
+        const id = formData.get("id") as string;
+
+        toggleOptimistic(id);
+        await action(formData);
+      }}
+    >
       <input type="hidden" name="id" value={id} />
       <button type="submit">
         <Heart size={size} className={cn([heartClass, className])} />
