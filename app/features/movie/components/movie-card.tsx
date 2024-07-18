@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { IMAGE_BASE_URL, IMAGE_SIZE } from "@/app/shared/constants";
+import { Clapperboard } from "lucide-react";
 import { Movie } from "@/app/features/movie/models";
 import { Flex, Badge, Card, CardContent } from "@/app/shared/components";
 
@@ -28,16 +29,26 @@ export const MovieCard = ({
             <span className="text-sm">{rank}</span>
           </Badge>
         )}
-        <CardContent className="flex aspect-square items-center justify-center">
-          <Image
-            src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W342}${poster_path}`}
-            alt="영화 포스터"
-            className="rounded-sm object-cover"
-            fill={true}
-            placeholder="blur"
-            blurDataURL={IMAGE_BASE_URL.BLUR}
-          />
-        </CardContent>
+        {poster_path ? (
+          <CardContent className="flex aspect-square items-center justify-center">
+            <Image
+              src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W342}${poster_path}`}
+              alt="영화 포스터"
+              className="rounded-sm object-cover"
+              fill={true}
+              placeholder="blur"
+              blurDataURL={IMAGE_BASE_URL.BLUR}
+            />
+          </CardContent>
+        ) : (
+          <Flex
+            align="center"
+            justify="center"
+            className="h-full bg-gray-100 rounded-sm"
+          >
+            <Clapperboard className="w-12 h-12 text-gray-500" />
+          </Flex>
+        )}
       </Card>
 
       <Flex direction="column" className="mt-2 gap-1">
