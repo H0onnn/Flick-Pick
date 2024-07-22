@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ICONS from "@/app/public/icons";
 import { IMAGE_BASE_URL, IMAGE_SIZE } from "@/app/shared/constants";
+import { Clapperboard } from "lucide-react";
 
 import {
   Avatar,
@@ -62,6 +63,7 @@ export const MyReviewCard = ({
           </Flex>
 
           <div className="relative min-w-[100px] min-h-[130px] w-[100px] h-[130px]">
+            moviePoster ? (
             <Image
               src={`${IMAGE_BASE_URL.DEFAULT}${IMAGE_SIZE.POSTER.W185}${moviePoster}`}
               alt="포스터"
@@ -70,6 +72,15 @@ export const MyReviewCard = ({
               placeholder="blur"
               blurDataURL={IMAGE_BASE_URL.BLUR}
             />
+            ) : (
+            <Flex
+              align="center"
+              justify="center"
+              className="h-full bg-gray-100 rounded-sm"
+            >
+              <Clapperboard className="w-12 h-12 text-gray-500" />
+            </Flex>
+            )
           </div>
         </Flex>
       </Link>
